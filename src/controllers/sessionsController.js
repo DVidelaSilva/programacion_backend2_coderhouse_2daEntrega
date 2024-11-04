@@ -8,9 +8,9 @@ class SessionController {
         this.sessionService = new SessionService()
     }
 
+
     postSessionRegister = async (req, res) => {
         try {
-
             const {body} = req
             const user = await this.sessionService.sessionRegisterUser(body)
 
@@ -23,11 +23,11 @@ class SessionController {
 
     postSessionLogin = async (req, res) => {
         try {
+            //IN
             const {body} = req
-            const user = await this.sessionService.SessionLoginUser(body)
-
-            return res.status(201).send({status: 'success', message: 'Usuario Logueado exitosamente', data: user})
-
+            const {token} = await this.sessionService.SessionLoginUser(body)
+            //OUT
+            return res.cookie('token', token).status(201).send({status: 'success', message: 'Usuario Logueado exitosamente', token})
         } catch (error) {
             return res.status(400).json({ status: 'error', error: error.message });
         }

@@ -1,5 +1,6 @@
 import UserRepository from "../repositories/usersRepository.js";
 import {createHash, isValidPassword} from '../utils/hash.bcrypt.js'
+import { generateToken } from "../middlewares/jwt.middlewares.js";
 
 class SessionService {
 
@@ -9,13 +10,10 @@ class SessionService {
     }
 
     sessionRegisterUser = async (data) => {
- 
             const {first_name, last_name, email, age, password} = data
-
-            const existUser = await this.userRepository.findUserByEmailInDB({email})
-            if (existUser){
+            const userFound = await this.userRepository.findUserByEmailInDB({email})
+            if (userFound){
                 throw new Error(`El usuario email <${email}>, ya se encuentra registrado`)
-                
             }
 
             const newUser = {
@@ -28,23 +26,29 @@ class SessionService {
 
             const user = await this.userRepository.createUserInDB(newUser); 
             return user
-
     }
 
 
     SessionLoginUser = async (data) => {
-
+        //IN
         const {email, password} = data
-
         const userFound = await this.userRepository.findUserByEmailInDB({email})
+        
+        //OUT
         if(!userFound){
             throw new Error(`El usuario email <${email}>, no se encuentra registrado`)
         }
-    
         if (!isValidPassword(password, userFound.password)) {
             throw new Error(`Las credenciales no coinciden`)
         }
-
+        const token = generateToken({id: userFound._id, role: userFound.role})
+        return {
+            token,
+            cookieOptions: {
+                maxAge: 1000 * 60 * 60 * 24,
+                httpOnly: true
+            }
+        }
     }
 
 

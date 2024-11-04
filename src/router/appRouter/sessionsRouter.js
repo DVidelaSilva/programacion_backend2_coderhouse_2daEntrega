@@ -1,14 +1,14 @@
 import { Router } from "express";
 import SessionController from "../../controllers/sessionsController.js";
-//import { validateUser, validateUserUpdate, validateUserId, handleValidationErrors } from "../../middlewares/userValidation.middlewares.js";
+import { validateRegister , validateLogin, handleValidationErrors} from "../../middlewares/sessionValidation.middlewares.js";
 
 const sessionRouter = Router();
 
 const sessionController = new SessionController()
 
 
-sessionRouter.post('/register', sessionController.postSessionRegister)
-sessionRouter.post('/login', sessionController.postSessionLogin)
+sessionRouter.post('/register', handleValidationErrors, validateRegister, sessionController.postSessionRegister)
+sessionRouter.post('/login', validateLogin, handleValidationErrors, sessionController.postSessionLogin)
 // sessionRouter.get('/logout')
 // sessionRouter.get('/github')
 // sessionRouter.get('/currentUser')
