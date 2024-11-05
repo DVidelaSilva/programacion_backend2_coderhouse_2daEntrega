@@ -25,7 +25,7 @@ class SessionController {
         try {
             //IN
             const {body} = req
-            const {token} = await this.sessionService.SessionLoginUser(body)
+            const {token} = await this.sessionService.sessionLoginUser(body)
             //OUT
             return res.cookie('token', token).status(201).send({status: 'success', message: 'Usuario Logueado exitosamente', token})
         } catch (error) {
@@ -34,51 +34,66 @@ class SessionController {
     }
 
 
-    // getSessionLogout = async (req, res) => {
-    //     try {
+    getSessionLogout = async (req, res) => {
+        try {
+            const {cookieName, message } = await this.sessionService.sessionLogoutUser()
 
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // }
+            
+            return res.clearCookie(cookieName).status(201).send({status: 'success', message: message})
 
+        } catch (error) {
+            console.log(error);
+            res.status(500).send({ status: 'error', message: 'Error al cerrar sesión' });
+        }
+    }
 
-    // getSessionGithub = async (req, res) => {
-    //     try {
+    
+    
 
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // }
+    getSessionGithubCallback = async (req, res) => {
+        try {
+            const { token, cookieOption } = await this.sessionService.sessionGithubLogin(req.user)
 
+            res.cookie('token', token, cookieOption)
 
-    // getSessionCurrentUser = async (req, res) => {
-    //     try {
+        } catch (error) {
+            console.log(error);
+            res.status(500).send({ status: 'error', message: 'Error en la autenticación con GitHub' });
+        }
+    }
 
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // }
+    getSessionCurrentUser = async (req, res) => {
+        try {
 
+            console.log({dataUser: req.user, message: 'datos sensibles user'})
+            res.send({ dataUser: req.user, message: 'datos sensibles user' });
+        } catch (error) {
+            console.log(error);
+            res.status(500).send({ status: 'error', message: 'Error al obtener los datos del usuario' });
+        }
+    }
 
-    // getSessionCurrentUserPremium = async (req, res) => {
-    //     try {
+    getSessionCurrentUserPremium = async (req, res) => {
+        try {
 
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // }
+            console.log({dataUser: req.user, message: 'datos sensibles user'})
+            res.send({ dataUser: req.user, message: 'datos sensibles user' });
+        } catch (error) {
+            console.log(error);
+            res.status(500).send({ status: 'error', message: 'Error al obtener los datos del usuario' });
+        }
+    }
 
+    getSessionCurrentUserAdmin = async (req, res) => {
+        try {
 
-    // getSessionCurrentAdmin = async (req, res) => {
-    //     try {
-
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // }
-
-
+            console.log({dataUser: req.user, message: 'datos sensibles user'})
+            res.send({ dataUser: req.user, message: 'datos sensibles user' });
+        } catch (error) {
+            console.log(error);
+            res.status(500).send({ status: 'error', message: 'Error al obtener los datos del usuario' });
+        }
+    }
 
 
 }
