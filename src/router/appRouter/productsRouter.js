@@ -1,17 +1,17 @@
 import { Router } from "express";
 import ProductController from "../../controllers/productsController.js";
-import { validateProduct, validateProductUpdate, validateProductId, handleValidationErrors } from "../../middlewares/productValidation.middlewares.js";
+import { validateProduct, validateProductUpdate, validateProductId, handleValidationProductErrors } from "../../middlewares/validacionesMiddlewares/productValidation.middlewares.js";
 
 const productRouter = Router();
 
 const productController = new ProductController()
 
 
-productRouter.post('/', validateProduct, handleValidationErrors, productController.postProduct)
+productRouter.post('/', validateProduct, handleValidationProductErrors, productController.postProduct)
 productRouter.get('/', productController.getProducts)
-productRouter.get('/:pid', validateProductId, handleValidationErrors, productController.getProduct)
-productRouter.put('/:pid', validateProductId, validateProductUpdate, handleValidationErrors, productController.putProduct)
-productRouter.delete('/:pid', validateProductId, handleValidationErrors, productController.deleteProduct)
+productRouter.get('/:pid', validateProductId, handleValidationProductErrors, productController.getProduct)
+productRouter.put('/:pid', validateProductId, validateProductUpdate, handleValidationProductErrors, productController.putProduct)
+productRouter.delete('/:pid', validateProductId, handleValidationProductErrors, productController.deleteProduct)
 
 
 

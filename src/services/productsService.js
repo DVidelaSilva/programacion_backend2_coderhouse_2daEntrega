@@ -5,7 +5,7 @@ import ProductRepository from "../repositories/productsRepository.js";
 class ProductService {
 
     constructor() {
-        this.productrepository = new ProductRepository();
+        this.productrepository = new ProductRepository()
 
     }
 

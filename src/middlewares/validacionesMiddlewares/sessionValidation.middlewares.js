@@ -38,7 +38,7 @@ const validateLogin = [
 ]
 
 
-const handleValidationErrors = (req, res, next) => {
+const handleValidationSessionErrors = (req, res, next) => {
     const errors = validationResult(req)
     if(!errors.isEmpty()){
         return res.status(400).send({errors: errors.array()});
@@ -50,5 +50,5 @@ const handleValidationErrors = (req, res, next) => {
 export{
     validateRegister,
     validateLogin,
-    handleValidationErrors
+    handleValidationSessionErrors
 }

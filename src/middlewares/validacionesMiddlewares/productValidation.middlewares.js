@@ -79,7 +79,7 @@ const validateProductId = [
 ]
 
 
-const handleValidationErrors = (req, res, next) => {
+const handleValidationProductErrors = (req, res, next) => {
     const errors = validationResult(req)
     if(!errors.isEmpty()){
         return res.status(400).send({errors: errors.array()});
@@ -92,5 +92,5 @@ export{
     validateProduct,
     validateProductUpdate,
     validateProductId,
-    handleValidationErrors
+    handleValidationProductErrors
 }

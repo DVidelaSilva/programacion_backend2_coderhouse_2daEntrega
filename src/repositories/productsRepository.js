@@ -38,7 +38,8 @@ class ProductRepository {
             //IN
             const product = await this.productDao.getById(pid)
             //OUT
-            return new ProductDto(product)
+            //return new ProductDto(product)
+            return product
         } catch (error) {
             console.log(error)
         }
