@@ -148,13 +148,13 @@ class CartController {
     }
 
 
-    getCartForPurchase = async (req, res) => {
+    getStockProductInCart = async (req, res) => {
         try {
             const { cid } = req.params
-            const cart = await this.cartService.findCartByIdForPurchase(cid)
+            const stockStatus = await this.cartService.findStockProductInCart(cid)
             //console.log(cart);
-            if (cart) {
-                return res.status(200).send({status: 'success', message: 'Carrito Encontrado exitosamente', data: cart})
+            if (stockStatus) {
+                return res.status(200).send({status: 'success', message: 'Stock Status ', data: stockStatus})
             } else {
                 return res.status(404).send({message: `Carrito id ${cid} no encontrado`})
             }
@@ -164,13 +164,13 @@ class CartController {
     }
 
 
-    getPurchaseCart = async (req, res) => {
+    getResumePurchaseCart = async (req, res) => {
         try {
             const { cid } = req.params
-            const cart = await this.cartService.purchaseCart(cid)
+            const stockStatus = await this.cartService.resumePurchaseCart(cid)
             //console.log(cart);
-            if (cart) {
-                return res.status(200).send({status: 'success', message: 'Carrito Encontrado exitosamente', data: cart})
+            if (stockStatus) {
+                return res.status(200).send({status: 'success', message: 'Resume Purchase', data: stockStatus})
             } else {
                 return res.status(404).send({message: `Carrito id ${cid} no encontrado`})
             }
@@ -183,13 +183,13 @@ class CartController {
 
     getPay = async (req, res) => {
         try {
-            const { cid } = req.params
-            const cart = await this.cartService.payCart(cid)
+            const { cid, uid} = req.params
+            const payTicket = await this.cartService.payCart(cid, uid)
             //console.log(cart);
-            if (cart) {
-                return res.status(200).send({status: 'success', message: 'Carrito Encontrado exitosamente', data: cart})
+            if (payTicket) {
+                return res.status(200).send({status: 'success', message: 'Pago Realizado exitosamente', data: payTicket})
             } else {
-                return res.status(404).send({message: `Carrito id ${cid} no encontrado`})
+                return res.status(404).send({message: `No se pudo procesar el pago para el carrito id ${cid}`})
             }
         } catch (error) {
             console.log(error);

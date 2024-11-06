@@ -1,13 +1,16 @@
 import { body } from "express-validator";
 import CartRepository from "../repositories/cartsRepository.js";
 import ProductRepository from "../repositories/productsRepository.js";
-
+import UserRepository from '../repositories/usersRepository.js'
+import TicketRepository from '../repositories/ticketsRepository.js'
 
 class CartService {
 
     constructor() {
         this.cartRepository = new CartRepository()
         this.productRepository = new ProductRepository()
+        this.userRepository = new UserRepository()
+        this.ticketRepository = new TicketRepository()
     }
 
     createCart = async (data) => {
@@ -141,62 +144,48 @@ class CartService {
 
 
 
-    findCartByIdForPurchase = async (cid) => {
+    findStockProductInCart = async (cid) => {
         try {
-            // Obtener el carrito de la base de datos
-            const cart = await this.cartRepository.findCartByIdInDB(cid);
-            console.log('Carrito:', cart);
-    
-            // Crear un array para almacenar los resultados de la comprobación de stock
+            const cart = await this.cartRepository.findCartByIdInDB(cid)
+
+            // Array para almacenar los resultados de la comprobación de stock
             const stockStatus = await Promise.all(
                 cart.products.map(async (item) => {
-                    // Obtener los detalles del producto desde el repositorio
-                    const product = await this.productRepository.findProductByIdInDB(item.product);
-                    
-                    // Comparar el stock con la cantidad solicitada
+                    const product = await this.productRepository.findProductByIdInDB(item.product)
                     if (product.stock >= item.quantity) {
-                        return { productId: item.product, status: "stock disponible" };
+                        return { productId: item.product, status: "stock disponible" }
                     } else {
-                        return { productId: item.product, status: "no se puede comprar" };
+                        return { productId: item.product, status: "no hay stock disponible" }
                     }
                 })
-            );
-    
-            console.log('Estado de stock de los productos en el carrito:', stockStatus);
-    
-            // Retornar el carrito completo junto con el estado de stock de los productos
-            return { cart: cart.toObject(), stockStatus };
+            )
+
+            return { stockStatus }
         } catch (error) {
-            console.log(error);
-            throw new Error('Error al verificar el stock de los productos en el carrito');
+            console.log(error)
+            throw new Error('Error al verificar el stock de los productos en el carrito')
         }
     }
 
 
-    purchaseCart = async (cid) => {
+
+    resumePurchaseCart = async (cid) => {
         try {
-            // Obtener el carrito de la base de datos
-            const cart = await this.cartRepository.findCartByIdInDB(cid);
-            console.log('Carrito:', cart);
-    
-        // Crear un array para almacenar los productos con stock disponible
+            const cart = await this.cartRepository.findCartByIdInDB(cid)
+
+        // Array para almacenar los productos con stock disponible
         const stockStatus = (await Promise.all(
             cart.products.map(async (item) => {
-                // Obtener los detalles del producto desde el repositorio
-                const product = await this.productRepository.findProductByIdInDB(item.product);
+                const product = await this.productRepository.findProductByIdInDB(item.product)
 
-                // Comparar el stock con la cantidad solicitada
                 if (product.stock >= item.quantity) {
-                    return { productId: item.product, status: "stock disponible" };
+                    return { productId: item.product, status: "stock disponible" }
                 }
-                // Si el stock no es suficiente, retornar null para ignorarlo
-                return null;
+                // Si el stock no es suficiente, retorna null para ignorarlo
+                return null
             })
-        )).filter(item => item !== null); // Filtrar los elementos nulos
+        )).filter(item => item !== null);
 
-        console.log('Productos con stock disponible:', stockStatus);
-
-        // Retornar solo los productos con stock disponible
         return stockStatus;
         } catch (error) {
             console.log(error);
@@ -205,47 +194,46 @@ class CartService {
     }
 
 
-    payCart = async (cid) => {
+    payCart = async (cid, uid) => {
         try {
-            // Obtener el carrito de la base de datos
-            const cart = await this.cartRepository.findCartByIdInDB(cid);
-            //console.log('Carrito:', cart);
-    
-        // Crear un array para almacenar los productos con stock disponible
+            const cart = await this.cartRepository.findCartByIdInDB(cid)
+            const user = await this.userRepository.findUserByIdInDB(uid)
+
+        let totalAmount = 0
+        const userEmail = user.email
+
+        // Array para almacenar los productos con stock disponible
         const stockStatus = (await Promise.all(
             cart.products.map(async (item) => {
                 // Obtener los detalles del producto desde el repositorio
-                const product = await this.productRepository.findProductByIdInDB(item.product);
-                console.log(item.product);
-                console.log(product.stock);
-                console.log(item.quantity);
+                const product = await this.productRepository.findProductByIdInDB(item.product)
                 // Comparar el stock con la cantidad solicitada
                 if (product.stock >= item.quantity) {
-                    console.log(product.stock);
                     // Restar la cantidad directamente en la base de datos
-                    product.stock -= item.quantity;
-                    await product.save();  // Guardar el nuevo valor de stock en la base de datos
-
-                    return { productId: item.product, status: "stock disponible" };
+                    product.stock -= item.quantity
+                    await product.save()
+                    // Sumar el precio del producto multiplicado por la cantidad al totalAmount
+                    totalAmount += product.price * item.quantity
                 }
                 // Si el stock no es suficiente, retornar null para ignorarlo
                 return null;
             })
-        )).filter(item => item !== null); // Filtrar los elementos nulos
+        )).filter(item => item !== null)
 
-        console.log('Productos con stock disponible:', stockStatus);
+        const payTicket = {
+            created_at: Date.now(),
+            amount: totalAmount,
+            purchaser: userEmail
+        }
 
-        // Retornar solo los productos con stock disponible
-        return stockStatus;
+        const payTicketToDB = await this.ticketRepository.createTicketInDB(payTicket)
+
+        return payTicket;
         } catch (error) {
             console.log(error);
             throw new Error('Error al verificar el stock de los productos en el carrito');
         }
     }
-
-
-
-
 
 }
 
