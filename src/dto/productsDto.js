@@ -1,6 +1,7 @@
 class ProductDto {
 
     constructor(product) {
+        this.id = product._id
         this.title = product.title;
         this.autor = product.autor;
         this.description = product.description;

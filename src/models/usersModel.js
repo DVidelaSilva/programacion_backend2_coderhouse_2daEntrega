@@ -35,9 +35,10 @@ const userSchema = new Schema({
         default: 'user'
     },
 
-    cartID: {
+    userCartId: {
         type: Schema.Types.ObjectId,
-        ref: 'carts'
+        ref: 'carts',
+        required: false
     }
 })
 

@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                             <h3>${product.autor}</h3>
                             <p>${product.title}</p>
                             <p class="precio">$${product.price}</p>
-                            <a href="#" class="agregar-carrito btn-3" data-id="${product.code}">Agregar al carrito</a>
+                            <a class="agregar-carrito btn-3" data-id="${product.code}">Agregar al carrito</a>
                         </div>
                     </div>
                 `
@@ -32,3 +32,12 @@ document.addEventListener('DOMContentLoaded', async function() {
 })
 
 
+
+
+// Delegar el evento de "Agregar al carrito" al contenedor de productos
+document.getElementById('lista-1').addEventListener('click', function(event) {
+    if (event.target.classList.contains('agregar-carrito')) {
+        // Solo imprimir en consola cuando se hace clic en el botón "Agregar al carrito"
+        console.log('Botón "Agregar al carrito" presionado')
+    }
+})

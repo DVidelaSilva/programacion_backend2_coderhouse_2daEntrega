@@ -2,11 +2,14 @@ import SessionService from "../services/sessionsService.js"
 
 
 
+
 class SessionController {
 
     constructor() {
         this.sessionService = new SessionService()
+ 
     }
+
 
 
     postSessionRegister = async (req, res) => {
@@ -67,12 +70,22 @@ class SessionController {
         }
     }
 
+  
+
+
     getSessionCurrentUser = async (req, res) => {
         try {
 
+            // res.render('homeUsers.handlebars'), {
+            //     dataUser: req.user,
+            //     message: 'datos sensibles user'
+            // }
             //res.send({ dataUser: req.user, message: 'datos sensibles user' });
             console.log({ dataUser: req.user, message: 'datos sensibles user' });
+            //res.render('homeUsers.handlebars')
             res.redirect('/currentUser')
+
+
 
         } catch (error) {
             console.log(error);
@@ -83,8 +96,8 @@ class SessionController {
     getSessionCurrentUserPremium = async (req, res) => {
         try {
 
-            console.log({ dataUser: req.user, message: 'datos sensibles user' });
-            //res.send({ dataUser: req.user, message: 'datos sensibles user' });
+            //console.log({ dataUser: req.user, message: 'datos sensibles user' });
+            res.send({ dataUser: req.user, message: 'datos sensibles user' });
             res.redirect('/currentUserPremium')
         } catch (error) {
             console.log(error);
@@ -104,6 +117,28 @@ class SessionController {
         }
     }
 
+
+
+
+    getExtract = async (req, res) => {
+        try {
+
+            // res.render('homeUsers.handlebars'), {
+            //     dataUser: req.user,
+            //     message: 'datos sensibles user'
+            // }
+            res.send({ dataUser: req.user, message: 'datos sensibles user' });
+            console.log({ dataUser: req.user, message: 'datos sensibles user' });
+            //res.render('homeUsers.handlebars')
+            //res.redirect('/currentUser')
+
+
+
+        } catch (error) {
+            console.log(error);
+            res.status(500).send({ status: 'error', message: 'Error al obtener los datos del usuario' });
+        }
+    }
 
 }
 

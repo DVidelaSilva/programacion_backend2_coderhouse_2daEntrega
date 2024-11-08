@@ -61,6 +61,7 @@ class SessionService {
     }
 
 
+
     sessionGithubLogin = async (user) => {
 
         const token = generateToken({id: user._id, role: user.role})
@@ -72,7 +73,6 @@ class SessionService {
         return{ token, cookieOptions }
 
     }
-
 
 
 }
