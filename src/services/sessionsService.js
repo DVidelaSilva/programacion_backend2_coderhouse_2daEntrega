@@ -43,11 +43,13 @@ class SessionService {
         }
         const token = generateToken({id: userFound._id, role: userFound.role})
 
+        const role = userFound.role
+        
         const cookieOptions = {
             maxAge: 1000 * 60 * 60 * 24,
             httpOnly: true
         }
-        return{ token, cookieOptions }
+        return{ token, cookieOptions, role }
     }
 
 

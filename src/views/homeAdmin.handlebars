@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HBS</title>
+    <link rel="stylesheet" href="/assets/css/homeAdminStyle.css">
+</head>
+<body>
+<!-- ********* MENU SUPERIOR *********-->
+    <header class="header">
+        <div class="menu container">
+                <img src="/assets/images/logo.png" alt="Logo" class="logo-img"> 
+            </a>
+            <input type="checkbox" id="menu"/>
+            <label for="menu">
+                <img src="/assets/images/menu.png" class="menu-icono" alt="menu">
+            </label>
+            <nav class="navbar">
+                <ul>
+                   <li><a href="#">CrearProducto</a></li>
+                   <li><a href="#">CrearUsuario</a></li>
+                   <li><a href="#">Asignar Role</a></li>
+                   <li><a href="#">Mi Perfil</a></li>
+                   <li><a id="logout" >Logout</a></li>
+                </ul>
+            </nav>
+            <!-- ********* CARRITO *********-->
+            <div>
+                <ul>
+                    <li class="submenu">
+                        <img id="img-carrito" src="assets/images/carrito.png" alt="car">
+                        <div id="carrito">
+                            <table id="lista-carrito"
+                                <thead>
+                                    <tr>
+                                        <th>Imagen</th>
+                                        <th>Nombre</th>
+                                        <th>Precio</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                            <a href="#" id="vaciar-carrito" class="btn-3">Vaciar Carrito</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+<!-- ********* BANDA SUPERIOR *********-->
+        <div class="header-content container"></div>
+    </header>
+ <!-- ********* BANDA CATEGORIAS *********-->
+    <section class="categories container">
+
+        <div class="category-1 b1">
+            <div class="category-txt">
+                <h3>Colección Libros Terror Paranormal</h3>
+            </div> 
+            <div class="category-img1">
+                <img src="assets/images/paranormal.png" alt="">
+            </div>
+        </div>
+        <div class="category-1 b2">
+            <div class="category-txt">
+                <h3>Colección Libros Terror Clásico</h3>
+            </div> 
+            <div class="category-img2">
+                <img src="assets/images/classic.png" alt="">
+            </div>
+        </div>
+        <div class="category-1 b3">
+            <div class="category-txt">
+                <h3>Colección Libros Terror Slasher</h3>
+            </div> 
+            <div class="category-img3">
+                <img src="assets/images/slasher.png" alt="">
+            </div>
+        </div>
+        <div class="category-1 b4">
+            <div class="category-txt">
+                <h3>Colección Libros Terror Cósmico</h3>
+            </div> 
+            <div class="category-img4">
+                <img src="assets/images/cosmic.png" alt="">
+            </div>
+        </div>
+        
+    </section>
+<!-- ********* BANDA PRODUCTOS *********-->
+    <main class="products container">
+        <h2>Productos</h2>
+        <div class="box-container" id="lista-1"></div>
+        <div class="btn-2" id="load-more">Cargar Mas</div>
+    </main>
+    
+<!-- ********* BANDA FOOTER *********-->
+    <footer class="footer">
+        <div class="footer-content container">
+            <div class="link">
+                <h3>Creado por DAVS</h3>
+            </div>   
+        </div>
+    </footer>
+
+    <script src="/assets/js/homeAdminScript.js"></script>
+</body>
+</html>
