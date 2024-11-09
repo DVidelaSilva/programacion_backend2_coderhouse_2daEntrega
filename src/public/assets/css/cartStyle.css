@@ -442,6 +442,27 @@ h2 {
 
 }
 
+#btn-vaciar {
+    border: none;
+    outline: none;
+    height: 40px;
+    background: #f45f1f;
+    color: white;
+    font-size: 18px;
+    border-radius: 20px;
+    width: 30%;
+    margin-top: -10px;
+    margin-bottom: 15px;
+
+}
+
+#btn-vaciar:hover {
+    cursor: pointer;
+    background: #ffc107;
+    color: #000;
+
+}
+
 @media (max-width:991px) {
 
     .menu {

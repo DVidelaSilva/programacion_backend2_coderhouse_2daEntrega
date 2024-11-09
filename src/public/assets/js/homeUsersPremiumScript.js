@@ -155,7 +155,6 @@ async function updateCartCount(cartId) {
       }
   
       const data = await response.json();
-      console.log('DATA CONTADOR', data);
       
       // Verifica que la respuesta tiene un status 'success' y totalQuantity
       if (data.status === 'success' && data.data.totalQuantity !== undefined) {
@@ -181,15 +180,18 @@ document.addEventListener('DOMContentLoaded', async function() {
     try {
 
       const cartCountElement = document.getElementById('cart-count');
+
       const userId = await idUser();
       const cartId = await idCart(userId);
-      console.log('DOM', cartId);
-      console.log('DOM', userId);
+
 
       if (cartId) {
-          const quantity = await updateCartCount(cartId);
-          cartCountElement.textContent = quantity;
-      }
+        // Actualizar el contador del carrito
+        const quantity = await updateCartCount(cartId);
+        cartCountElement.textContent = quantity;
+    } else {
+        cartCountElement.textContent = 0;  // Si no hay carrito, mostrar 0
+    }
       //Fetch
         const response = await fetch('http://localhost:8080/api/products')
         const data = await response.json()
@@ -199,15 +201,22 @@ document.addEventListener('DOMContentLoaded', async function() {
             const productContainer = document.getElementById('lista-1')
             productContainer.innerHTML = ''
 
+                                    // Formato para precios en moneda chilena
+                                    const numberFormat = new Intl.NumberFormat('es-CL', {
+                                      style: 'currency',
+                                      currency: 'CLP',
+                                      minimumFractionDigits: 0,  // Sin decimales
+                                  });
+
             products.forEach(product => {
+              const formattedPrice = numberFormat.format(product.price);
                 const productHTML = `
                  <div class="box">
                         <img src="${product.thumbnails}" alt="${product.title}">
                         <div class="product-txt">
                             <h3>${product.autor}</h3>
                             <p>${product.title}</p>
-                            <p>${product.id}</p> 
-                            <p class="precio">$${product.price}</p>
+                           <p class="precio">${formattedPrice}</p>
                             <!-- Aquí agregamos el _id de MongoDB al botón como un data-id -->
                             <a class="agregar-carrito btn-3" data-id="${product.id}">Agregar al carrito</a>
                         </div>
@@ -242,6 +251,20 @@ document.getElementById('lista-1').addEventListener('click', async function(even
     }
   }
 })
+
+// Actualizar contador al cargar la página
+document.addEventListener('DOMContentLoaded', async function() {
+  const cartCountElement = document.getElementById('cart-count');
+  const userId = await idUser();
+  const cartId = await idCart(userId);
+
+  if (cartId) {
+      const quantity = await updateCartCount(cartId);
+      cartCountElement.textContent = quantity;
+  } else {
+      cartCountElement.textContent = 0;  // Si no se pudo obtener el cartId, mostrar 0
+  }
+});
 
 
 // BOTON CARRITO

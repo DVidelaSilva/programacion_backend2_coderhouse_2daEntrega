@@ -11,6 +11,28 @@ function registerUser(firstName, lastName, email, age, password, role) {
     return;
   }
 
+  // Validación de la edad (si se proporciona, debe ser un número)
+  if (age && isNaN(age)) {
+    Swal.fire({
+      title: 'Error',
+      text: 'La edad debe ser un número.',
+      icon: 'error',
+      confirmButtonText: 'OK'
+    });
+    return;
+  }
+
+    // Validación del rol
+    const validRoles = ['admin', 'user-premium', 'user'];
+    if (!validRoles.includes(role)) {
+      Swal.fire({
+        title: 'Error',
+        text: 'El rol debe ser uno de los siguientes: admin, user-premium, user.',
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
+      return;
+    }
   // Datos a enviar
   const userData = {
     first_name: firstName,

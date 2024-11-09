@@ -72,10 +72,10 @@ body {
 /* Botón de "Home" */
 .home-button-container {
     margin-top: 20px;
-    margin-left: 700px;
-    width: 300px;
-    height: 100px;
-
+    /* Centrado automático en pantallas grandes y pequeños */
+    display: flex;
+    justify-content: center; /* Centramos el botón horizontalmente */
+    width: 100%; /* Asegura que ocupe el 100% del contenedor disponible */
 }
 
 #home {
@@ -88,6 +88,8 @@ body {
     cursor: pointer;
     transition: background-color 0.3s ease;
     font-weight: bold;
+    width: 50%; /* Puedes ajustar el tamaño del botón, en este caso ocupa el 50% del contenedor */
+    max-width: 300px; /* Ancho máximo del botón */
 }
 
 #home:hover {
@@ -97,17 +99,3 @@ body {
 #home:active {
     background-color: #cfa719;
 }
-
-/* Estilo para el footer
-footer {
-    background-color: black;
-    padding: 10px 0;
-    margin-top: 30px;
-    text-align: center;
-    color: white;
-}
-
-footer .footer-content h3 {
-    color: #FFFFFF;
-    font-size: 18px;
-} */

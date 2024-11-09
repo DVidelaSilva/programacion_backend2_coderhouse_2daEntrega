@@ -8,8 +8,9 @@ const ticketSchema = new Schema ({
         type: Date,
     },
     amount: {
-        type: Types.Decimal128,
+        type: Number,
         required: true,
+        min: 0
     },
     purchaser: {
         type: String,

@@ -88,27 +88,27 @@ async function idCart(userId) {
   }
 }
   
-// Función para eliminar los productos del carrito
-async function deleteProducts(cartId) {
-  try {
-    // Realizar la petición DELETE al servidor para eliminar el carrito
-    const response = await fetch(`http://localhost:8080/api/carts/${cartId}`, {
-      method: 'DELETE',  // Usamos DELETE para eliminar el carrito
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+// // Función para eliminar los productos del carrito
+// async function deleteProducts(cartId) {
+//   try {
+//     // Realizar la petición DELETE al servidor para eliminar el carrito
+//     const response = await fetch(`http://localhost:8080/api/carts/${cartId}`, {
+//       method: 'DELETE',  // Usamos DELETE para eliminar el carrito
+//       headers: {
+//         'Content-Type': 'application/json',
+//       },
+//     });
 
-    // Verificar la respuesta
-    if (!response.ok) {
-      throw new Error('Error al vaciar el carrito');
-    }
+//     // Verificar la respuesta
+//     if (!response.ok) {
+//       throw new Error('Error al vaciar el carrito');
+//     }
 
-    console.log('Carrito vacío exitosamente');
-  } catch (error) {
-    console.error('Error:', error);
-  }
-}
+//     console.log('Carrito vacío exitosamente');
+//   } catch (error) {
+//     console.error('Error:', error);
+//   }
+// }
 
 document.addEventListener('DOMContentLoaded', async function() {
   try {
@@ -143,10 +143,42 @@ document.addEventListener('DOMContentLoaded', async function() {
               minimumFractionDigits: 0,
           }).format(paymentData.amount);
           document.getElementById('amount-paid').textContent = formattedAmount;
+
+          // Enviar el correo de comprobante al endpoint de tickets
+          const ticketData = {
+            purchaser: paymentData.purchaser,
+            created_at: purchaseDate.toLocaleString(),
+            amount: formattedAmount
+        };
+
+        // Enviar el correo utilizando fetch
+        const emailResponse = await fetch('http://localhost:8080/api/tickets/mail', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(ticketData)
+        });
+
+        const emailData = await emailResponse.json();
+        if (emailData.status === 'success') {
+            console.log('Correo de comprobante enviado con éxito');
+        } else {
+            console.error('Error al enviar el correo de comprobante:', emailData.message);
+        }
+
+
+
+
+
+
       } else {
           console.error('Error al obtener el pago', data.message);
           alert('Error al obtener los detalles del pago');
       }
+
+
+
 
       // Agregar el evento al botón "Home"
       document.getElementById('home').addEventListener('click', async function() {
@@ -157,16 +189,16 @@ document.addEventListener('DOMContentLoaded', async function() {
 
       if(role === 'user'){
 
-      await deleteProducts(cartId)
+     //await deleteProducts(cartId)
 
       window.location.href = '/currentUser'
 
       } else if (role ==='user-premium') {
-        await deleteProducts(cartId)
+        //await deleteProducts(cartId)
 
         window.location.href = '/currentUserPremium'
       } else if (role ==='admin'){
-        await deleteProducts(cartId)
+        //await deleteProducts(cartId)
 
         window.location.href = '/currentAdmin'
       }else {

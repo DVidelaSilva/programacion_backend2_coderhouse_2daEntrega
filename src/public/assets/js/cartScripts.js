@@ -62,7 +62,62 @@ async function idCart(userId) {
       return null
     }
   }
+  
+    //VACIAR ID CART
+async function deleteAllOfCart(idCart) {
+  try {
+    if (!idCart) {
+      throw new Error('El userId no está definido')
+    }
 
+    const response = await fetch(`http://localhost:8080/api/carts/${idCart}`, {
+      method: 'DELETE', 
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    //console.log(response);
+    if (!response.ok) {
+      throw new Error(`Error en la respuesta de la API: ${response.statusText}`)
+    }
+
+    const data = await response.json()
+    //console.log('Respuesta de la API de usuario:', data);
+    console.log(data);
+  } catch (error) {
+    //console.error('Error en cartOfUserId:', error)
+    alert('Ocurrió un error al intentar obtener el carrito del usuario.')
+    return null
+  }
+}
+
+
+async function roleUser() {
+
+  try {
+      // Fetch
+      const response = await fetch('http://localhost:8080/api/sessions/extract', {
+        method: 'GET', 
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      const data = await response.json();
+  
+      if (data.dataUser && data.dataUser.role) {
+        console.log(data.dataUser.role);
+          return data.dataUser.role 
+      } else {
+          console.error('Error: No se encontró el ID del usuario');
+          alert('No se pudo obtener el ID del usuario.');
+          return null;  
+      }
+    } catch(error) {
+        console.error('Error:', error)
+        alert('Ocurrió un error al intentar cerrar sesión.')
+        return null
+      }
+}
 
 
   
@@ -117,7 +172,6 @@ async function idCart(userId) {
                                 <div class="product-txt">
                                     <h3>${product.autor}</h3>
                                     <p>${product.title}</p>
-                                    <p>ID: ${product.id}</p>
                                     <p class="precio">${formattedPrice}</p>
                                     <p>Cantidad: ${quantity}</p> <!-- Mostrar la cantidad -->
                                     <p>Total: ${formattedPrice}</p>  <!-- Mostrar el total calculado -->
@@ -193,6 +247,47 @@ document.getElementById('btn-pasar-a-comprar').addEventListener('click', functio
 
 
 
-document.getElementById('btn-back').addEventListener('click', function() {
-  window.history.back();  // Esto llevará al usuario a la página anterior en el historial.
+document.getElementById('btn-vaciar').addEventListener('click', async function() {
+  try {
+    // Obtener el ID del usuario y el carrito
+    const userId = await idUser();
+    const cartId = await idCart(userId);
+
+    // Llamar a la función que elimina todos los productos del carrito
+    await deleteAllOfCart(cartId);
+
+    // Recargar la página para reflejar los cambios (carrito vacío)
+    window.location.reload();
+    
+  } catch (error) {
+    console.error('Hubo un error al intentar actualizar el carrito o al obtener los datos:', error);
+  }
+});
+
+// Evento para el botón "Volver"
+document.getElementById('btn-back').addEventListener('click', async function() {
+  try {
+    const role = await roleUser();
+
+    if (!role) {
+      // Si no obtenemos un rol válido, no hacemos nada
+      console.error('Rol no disponible o no válido');
+      return;
+    }
+
+    console.log("Rol del usuario: ", role);  // Log para depuración
+
+    // Verifica el rol y redirige al usuario según corresponda
+    if (role === 'user') {
+      window.location.href = '/currentUser';
+    } else if (role === 'user-premium') {
+      window.location.href = '/currentUserPremium';
+    } else if (role === 'admin') {
+      window.location.href = '/currentAdmin';
+    } else {
+      console.error('Rol no válido:', role);
+    }
+  } catch (error) {
+    console.error('Error al manejar el rol del usuario:', error);
+  }
 });

@@ -60,6 +60,9 @@ viewsRouter.get('/soon', (req, res) => {
     res.render('soon.handlebars')
 })
 
+viewsRouter.get('/CartResume', (req, res) => {
+    res.render('cartResume.handlebars')
+})
 
 
 

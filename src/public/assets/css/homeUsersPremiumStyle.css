@@ -35,7 +35,7 @@ img {
     padding: 0 0 0 0;
 }
 
-.menu {
+/* .menu {
     position: absolute;
     top: 0;
     left: 0;
@@ -43,7 +43,25 @@ img {
     display: flex;
     align-items: center;
     justify-content: space-between;  
+} */
+
+.menu {
+    position: fixed; /* Mantener el navbar fijo */
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background-color: #c6c6c6;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 8px 0;  /* Reduce el padding superior e inferior */
+    max-width: 1350px;
+    width: 100%;
+    margin: 0 auto;  /* Centrar el menú */
+    display: flex;
+    justify-content: space-between;  /* Para mantener el logo y el navbar alineados */
+    align-items: center;  /* Centrar verticalmente el contenido */
 }
+
 
 .logo-img {
     width: 80px; 

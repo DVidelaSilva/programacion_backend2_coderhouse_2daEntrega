@@ -88,11 +88,11 @@ async function idCart(userId) {
             productContainer.innerHTML = '';  // Limpiar el contenedor antes de agregar nuevos productos
 
             // Realizar la solicitud para obtener el estado de stock de los productos
-            const responseStockStatus = await fetch(`http://localhost:8080/api/carts/purchase/${cartId}`);
+            const responseStockStatus = await fetch(`http://localhost:8080/api/carts/purchaseCart/${cartId}`);
             const stockData = await responseStockStatus.json();
 
-            if (stockData.status === 'success' && stockData.data && Array.isArray(stockData.data.stockStatus)) {
-                const stockStatus = stockData.data.stockStatus;  // Aquí obtenemos el estado de stock de los productos
+            if (stockData.status === 'success' && stockData.data && Array.isArray(stockData.data)) {
+                const stockStatus = stockData.data;  // Aquí obtenemos el estado de stock de los productos
 
                 // Recorrer el array de productos
                 for (let productData of products) {
@@ -102,6 +102,8 @@ async function idCart(userId) {
                     // Buscar el estado de stock correspondiente a este producto
                     const stockInfo = stockStatus.find(status => status.productId === productId);
                     const stockStatusText = stockInfo ? stockInfo.status : 'no hay stock disponible';  // Si no se encuentra, por defecto se asume "no disponible"
+                    console.log(stockStatusText);
+                    if (stockStatusText === 'stock disponible') {
 
                     // Hacer otra solicitud para obtener los detalles del producto usando su ID
                     const productResponse = await fetch(`http://localhost:8080/api/products/${productId}`);
@@ -111,23 +113,13 @@ async function idCart(userId) {
                         const product = productDetails.data;
                         const productPrice = product.price;
 
-                        // Definir mensaje y clase según el estado del stock
-                        let stockMessage = '';
-                        let stockClass = '';
-                        let addToTotal = true; // Flag para indicar si sumar este producto al total
+                       // Definir mensaje y clase según el estado del stock
+                       let stockMessage = 'Disponible'; // Mensaje de stock
+                       let stockClass = 'in-stock';   // Clase para CSS
 
-                        // Si el stock no está disponible, no sumar al total y marcar el producto como no disponible
-                        if (stockStatusText === 'no hay stock disponible') {
-                            stockMessage = 'No disponible';
-                            stockClass = 'stock-unavailable';
-                            addToTotal = false; // No sumar al total
-                        } else {
-                            stockMessage = 'Disponible';
-                            stockClass = 'stock-available';
-                        }
+                       // Calculamos el precio total del producto
+                       const totalProductPrice = quantity * productPrice;
 
-                        // Si el producto está disponible, sumamos al total
-                        const totalProductPrice = addToTotal ? quantity * productPrice : 0;
 
                         // Formatear el precio con el símbolo y formato adecuado para Chile
                         const formattedPrice = new Intl.NumberFormat('es-CL', {
@@ -136,11 +128,13 @@ async function idCart(userId) {
                             minimumFractionDigits: 0,  // Puedes ajustar a 0 o 2, dependiendo de si quieres mostrar decimales
                         }).format(totalProductPrice);
 
-                        // Acumular el total de la cantidad y el total a pagar solo si el producto está disponible
-                        if (addToTotal) {
-                            totalQuantity += quantity;
-                            totalPrice += totalProductPrice;
-                        }
+                        // // Acumular el total de la cantidad y el total a pagar solo si el producto está disponible
+                        // if (addToTotal) {
+                        //     totalQuantity += quantity;
+                        //     totalPrice += totalProductPrice;
+                        // }
+                        totalQuantity += quantity;
+                        totalPrice += totalProductPrice;
 
                         const productHTML = `
                             <div class="box">
@@ -160,7 +154,7 @@ async function idCart(userId) {
                         console.error('No se pudieron obtener los detalles del producto', productDetails);
                     }
                 }
-
+              }
                 // Actualizar los totales en la sección total
                 const formattedTotalPrice = new Intl.NumberFormat('es-CL', {
                     style: 'currency',
@@ -188,10 +182,10 @@ async function idCart(userId) {
 
     // BOTON CARRITO
     document.getElementById('btn-pagar').addEventListener('click', function() {
-      window.location.href = '/cartResume';  
+      window.location.href = '/cartPay';  
     });
 
-    
+
     document.getElementById('btn-back').addEventListener('click', function() {
       window.history.back();  // Esto llevará al usuario a la página anterior en el historial.
     });

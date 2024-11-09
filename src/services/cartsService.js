@@ -3,6 +3,7 @@ import CartRepository from "../repositories/cartsRepository.js";
 import ProductRepository from "../repositories/productsRepository.js";
 import UserRepository from '../repositories/usersRepository.js'
 import TicketRepository from '../repositories/ticketsRepository.js'
+//import CartController from "../controllers/cartsController.js";
 
 class CartService {
 
@@ -11,7 +12,11 @@ class CartService {
         this.productRepository = new ProductRepository()
         this.userRepository = new UserRepository()
         this.ticketRepository = new TicketRepository()
+        //this.cartController = new CartController()
+        
     }
+
+
 
     createCart = async (data) => {
         try {
@@ -192,7 +197,7 @@ class CartService {
                 const product = await this.productRepository.findProductByIdInDB(item.product)
 
                 if (product.stock >= item.quantity) {
-                    return { productId: item.product, status: "stock disponible" }
+                    return { productId: item.product, status: "stock disponible", amount: item.product.price }
                 }
                 // Si el stock no es suficiente, retorna null para ignorarlo
                 return null
@@ -207,46 +212,146 @@ class CartService {
     }
 
 
+    // payCart = async (cid, uid) => {
+    //     try {
+    //         const cart = await this.cartRepository.findCartByIdInDB(cid)
+    //         const user = await this.userRepository.findUserByIdInDB(uid)
+
+    //     let totalAmount = 0
+    //     const userEmail = user.email
+
+    //     // Array para almacenar los productos con stock disponible
+    //     const stockStatus = (await Promise.all(
+    //         cart.products.map(async (item) => {
+    //             // Obtener los detalles del producto desde el repositorio
+    //             const product = await this.productRepository.findProductByIdInDB(item.product)
+    //             // Comparar el stock con la cantidad solicitada
+    //             if (product.stock >= item.quantity) {
+    //                 // Restar la cantidad directamente en la base de datos
+    //                 product.stock -= item.quantity
+    //                 await product.save()
+    //                 // Sumar el precio del producto multiplicado por la cantidad al totalAmount
+    //                 totalAmount += product.price * item.quantity
+    //             }
+    //             // Si el stock no es suficiente, retornar null para ignorarlo
+    //             return null;
+    //         })
+    //     )).filter(item => item !== null)
+
+    //     const payTicket = {
+    //         created_at: Date.now(),
+    //         amount: totalAmount,
+    //         purchaser: userEmail
+    //     }
+
+    //     const payTicketToDB = await this.ticketRepository.createTicketInDB(payTicket)
+
+    //     return payTicket;
+    //     } catch (error) {
+    //         console.log(error);
+    //         throw new Error('Error al verificar el stock de los productos en el carrito');
+    //     }
+    // }
+
+
     payCart = async (cid, uid) => {
         try {
-            const cart = await this.cartRepository.findCartByIdInDB(cid)
-            const user = await this.userRepository.findUserByIdInDB(uid)
+            // Buscar el carrito y el usuario
+            const cart = await this.cartRepository.findCartByIdInDB(cid);
+            const user = await this.userRepository.findUserByIdInDB(uid);
+    
+            let totalAmount = 0
+            const userEmail = user.email;
+    
+            // Array para almacenar los productos con stock disponible
+            const stockStatus = await Promise.all(
+                cart.products.map(async (item) => {
+                    // Obtener los detalles del producto desde el repositorio
+                    const product = await this.productRepository.findProductByIdInDB(item.product)
+                    // Verificar si hay suficiente stock
+                    if (product.stock >= item.quantity) {
+                        // Restar la cantidad al stock del producto en la base de datos
+                        product.stock -= item.quantity;
+                        await product.save();
+                        
+                        
+                        
+                                    // Devolver el producto con stock disponible
+            return { 
+                productId: item.product, 
+                status: "stock disponible", 
+                monto: product.price * item.quantity,  // Aquí calculamos la multiplicación
+            } 
 
-        let totalAmount = 0
-        const userEmail = user.email
+            } else             return { 
+                productId: item.product, 
+                status: "no hay stock disponible" 
+            };
+                })
+            );
 
-        // Array para almacenar los productos con stock disponible
-        const stockStatus = (await Promise.all(
-            cart.products.map(async (item) => {
-                // Obtener los detalles del producto desde el repositorio
-                const product = await this.productRepository.findProductByIdInDB(item.product)
-                // Comparar el stock con la cantidad solicitada
-                if (product.stock >= item.quantity) {
-                    // Restar la cantidad directamente en la base de datos
-                    product.stock -= item.quantity
-                    await product.save()
-                    // Sumar el precio del producto multiplicado por la cantidad al totalAmount
-                    totalAmount += product.price * item.quantity
+            // Ahora sumamos todos los montos de las multiplicaciones
+            const totalprice = stockStatus.reduce((acc, item) => {
+                // Solo sumamos los productos con stock disponible
+                if (item.status === "stock disponible") {
+                    return acc + item.monto; // Sumar el monto calculado previamente
                 }
-                // Si el stock no es suficiente, retornar null para ignorarlo
-                return null;
-            })
-        )).filter(item => item !== null)
+                return acc; // Si no está disponible, no sumamos
+            }, 0);
 
-        const payTicket = {
-            created_at: Date.now(),
-            amount: totalAmount,
-            purchaser: userEmail
-        }
+            console.log("Total de la compra:", totalprice);
 
-        const payTicketToDB = await this.ticketRepository.createTicketInDB(payTicket)
 
-        return payTicket;
+            // Array para almacenar los resultados de la comprobación de stock
+            const stockStatus2 = await Promise.all(
+                cart.products.map(async (item) => {
+                    const product = await this.productRepository.findProductByIdInDB(item.product)
+                    if (product.stock >= item.quantity) {
+                        return { productId: item.product, status: "stock disponible" }
+                    } else {
+                        return { productId: item.product, status: "no hay stock disponible" }
+                    }
+                })
+            )
+
+            // Filtrar los productos con "stock disponible" para eliminar del carrito
+            const productsToRemove = stockStatus2.filter(item => item && item.status === "stock disponible");
+            const productIds = productsToRemove.map(item => item.productId);       
+            // Eliminar los productos con stock disponible del carrito
+            for (let item of productIds) {
+                await this.productRepository.deleteProductOfCartInDB(cid, item)
+            }
+
+
+
+            console.log('EL MONTO TOTAL', totalprice);
+
+            
+            // Crear el ticket de pago
+            const payTicket = {
+                created_at: Date.now(),
+                amount: totalprice, // Asegurarte de que es un número simple
+                purchaser: userEmail
+            };
+            
+
+           
+            const payTicketToDB = await this.ticketRepository.createTicketInDB(payTicket);
+
+            console.log('ID TICKET', payTicketToDB._id);
+
+
+
+
+
+            // Retornar el ticket
+            return payTicketToDB;
+    
         } catch (error) {
             console.log(error);
             throw new Error('Error al verificar el stock de los productos en el carrito');
         }
-    }
+    };
 
 }
 
