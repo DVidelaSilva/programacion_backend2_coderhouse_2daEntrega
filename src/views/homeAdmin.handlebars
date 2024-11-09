@@ -18,11 +18,11 @@
             </label>
             <nav class="navbar">
                 <ul>
-                   <li><a href="#">CrearProducto</a></li>
-                   <li><a href="#">CrearUsuario</a></li>
-                   <li><a href="#">Asignar Role</a></li>
-                   <li><a href="#">Mi Perfil</a></li>
-                   <li><a id="logout" >Logout</a></li>
+                   <li><a id="crearproducto">CrearProducto</a></li>
+                   <li><a id="crearusuario">CrearUsuario</a></li>
+                   <li><a id="updaterole">Asignar Role</a></li>
+                   <li><a id="soon">Mi Perfil</a></li>
+                   <li><a id="logout">Logout</a></li>
                 </ul>
             </nav>
             <!-- ********* CARRITO *********-->
@@ -30,7 +30,8 @@
                 <ul>
                     <li class="submenu">
                         <img id="img-carrito" src="assets/images/carrito.png" alt="car">
-                        <div id="carrito">
+                        <span id="cart-count" class="cart-count">0</span> 
+                        {{!-- <div id="carrito">
                             <table id="lista-carrito"
                                 <thead>
                                     <tr>
@@ -42,7 +43,7 @@
                                 <tbody></tbody>
                             </table>
                             <a href="#" id="vaciar-carrito" class="btn-3">Vaciar Carrito</a>
-                        </div>
+                        </div> --}}
                     </li>
                 </ul>
             </div>
@@ -91,7 +92,7 @@
     <main class="products container">
         <h2>Productos</h2>
         <div class="box-container" id="lista-1"></div>
-        <div class="btn-2" id="load-more">Cargar Mas</div>
+        {{!-- <div class="btn-2" id="load-more">Cargar Mas</div> --}}
     </main>
     
 <!-- ********* BANDA FOOTER *********-->
@@ -104,5 +105,7 @@
     </footer>
 
     <script src="/assets/js/homeAdminScript.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+   
 </body>
 </html>

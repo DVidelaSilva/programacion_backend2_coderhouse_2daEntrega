@@ -11,7 +11,12 @@ const cartsSchema = new Schema ({
         },
        quantity: Number,
         _id: false 
-    }]
+    }],
+    totalQuantity: {
+        type: Number,
+        default: 0
+    }
+
 })
 
 

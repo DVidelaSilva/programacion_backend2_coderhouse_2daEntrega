@@ -32,7 +32,33 @@ viewsRouter.get('/currentUserPremium', (req, res) => {
     res.render('homeUsersPremium.handlebars')
 })
 
+viewsRouter.get('/cart', (req, res) => {
+    res.render('cart.handlebars')
+})
 
+viewsRouter.get('/cartStock', (req, res) => {
+    res.render('cartStock.handlebars')
+})
+
+viewsRouter.get('/cartPay', (req, res) => {
+    res.render('cartPay.handlebars')
+})
+
+viewsRouter.get('/createUser', (req, res) => {
+    res.render('createUser.handlebars')
+})
+
+viewsRouter.get('/createProduct', (req, res) => {
+    res.render('createProduct.handlebars')
+})
+
+viewsRouter.get('/updateRole', (req, res) => {
+    res.render('assignRole.handlebars')
+})
+
+viewsRouter.get('/soon', (req, res) => {
+    res.render('soon.handlebars')
+})
 
 
 

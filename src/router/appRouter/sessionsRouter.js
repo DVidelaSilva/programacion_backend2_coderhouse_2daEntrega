@@ -23,7 +23,7 @@ sessionRouter.get('/currentAdmin', passportCall('jwt'), authorization('admin'), 
 
 
 
-sessionRouter.get('/extract', passportCall('jwt'), sessionController.getExtract)
+sessionRouter.get('/extract', passportCall('jwt'), sessionController.getExtractUserId)
 
 
 
@@ -31,3 +31,4 @@ sessionRouter.get('/extract', passportCall('jwt'), sessionController.getExtract)
 
 
 export default sessionRouter;
+

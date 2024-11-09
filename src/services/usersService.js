@@ -78,6 +78,22 @@ class UserService {
         }
     }
 
+    updateUserByEmail = async (email, newRole) => {
+        try{
+            //IN
+            const user = await this.userRepository.updateUserByEmailInDB(email, newRole)
+            // Si el usuario no fue encontrado
+            if (!user) {
+                console.log('Usuario no encontrado');
+                return null; // O puedes lanzar un error
+            }
+            //OUT
+            return user
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
 
     deleteUserById = async (uid) => {
         try {

@@ -6,6 +6,7 @@ class UserDto {
         this.email = user.email;
         this.age = user.age;
         this.role = user.role;
+        this.userCartId = user.userCartId
         
     }
 }

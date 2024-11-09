@@ -11,6 +11,8 @@ import { fileURLToPath } from 'url';
 import cors from 'cors'
 
 
+
+
 // Definir __dirname en un entorno de módulos ES
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

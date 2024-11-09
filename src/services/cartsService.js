@@ -39,10 +39,23 @@ class CartService {
 
     findCartById = async (cid) => {
         try {
-            //IN
-            const cart = await this.cartRepository.findCartByIdInDB(cid)
-            //OUT
-            return cart
+            const cart = await this.cartRepository.findCartByIdInDB(cid);
+            if (cart && cart.products) {
+                // Sumar todas las cantidades de los productos en el carrito
+                const totalQuantity = cart.products.reduce((sum, product) => sum + product.quantity, 0);
+                   // Retornar tanto el carrito como el totalQuantity
+            return {
+                cart: cart,
+                totalQuantity: totalQuantity
+            };
+        } else {
+            // Si no hay productos en el carrito o el carrito no existe
+            return {
+                cart: null,
+                totalQuantity: 0
+            };
+        }
+   
         } catch (error) {
             console.log(error);
         }
@@ -68,7 +81,7 @@ class CartService {
                 // Si el producto no existe, se agrega al carrito
                 cart.products.push({
                     product: product._id, 
-                    quantity: quantity 
+                    quantity: quantity
                 });
             }
             // Guardar el carrito actualizado

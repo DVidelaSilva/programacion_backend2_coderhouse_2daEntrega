@@ -1,11 +1,13 @@
 import UserRepository from "../repositories/usersRepository.js";
 import {createHash, isValidPassword} from '../utils/hash.bcrypt.js'
 import { generateToken } from "../middlewares/jwt.middlewares.js";
+import CartRepository from "../repositories/cartsRepository.js";
 
 class SessionService {
 
     constructor() {
         this.userRepository = new UserRepository();
+        this.cartRepository = new CartRepository()
 
     }
 
@@ -16,12 +18,17 @@ class SessionService {
                 throw new Error(`El usuario email <${email}>, ya se encuentra registrado`)
             }
 
+            const cart = await this.cartRepository.createCartInDB(data)  
+            const userCartId = cart.id
+
+            
             const newUser = {
                 first_name,
                 last_name,
                 email,
                 age,
                 password: createHash(password),
+                userCartId: userCartId
             }
 
             const user = await this.userRepository.createUserInDB(newUser); 

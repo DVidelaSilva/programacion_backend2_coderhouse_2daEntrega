@@ -1,0 +1,113 @@
+/* Importación de las fuentes */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Creepster&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+/* Reset global */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #c6c6c6; /* Fondo gris */
+}
+
+/* Contenedor principal para la tarjeta */
+.receipt-container {
+    width: 100%;
+    max-width: 700px; /* Limitar el ancho máximo */
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 50px auto; /* Centrado vertical y horizontal con margen automático */
+}
+/* Estilo para el título */
+.titulo {
+    font-size: 50px;
+    color: #111419;
+    font-family: 'Creepster', sans-serif; /* Fuente personalizada */
+    text-align: center;  /* Centrado horizontal */
+    margin-top: 100px;  /* Espacio superior */
+    margin-bottom: 30px; /* Espacio inferior */
+}
+/* Logo */
+.logo-img {
+    width: 80px;
+    height: auto;
+    margin-bottom: 20px; /* Espacio debajo del logo */
+    margin-left: 30px;
+    margin-top: 30px;
+}
+
+/* Título */
+.receipt-card h2 {
+    font-size: 40px;
+    margin-bottom: 20px;
+    color: #111419;
+    font-family: 'Poppins', sans-serif; /* Fuente como la de los encabezados */
+}
+
+/* Estilo para los párrafos dentro de la tarjeta */
+.receipt-card p {
+    font-size: 20px;
+    margin: 10px 0;
+    color: #515557;
+}
+
+/* Resaltar información clave */
+.receipt-card span {
+    font-weight: bold;
+    color: #F45F1F; /* Color de la marca */
+}
+
+/* Botón de "Home" */
+.home-button-container {
+    margin-top: 20px;
+    margin-left: 700px;
+    width: 300px;
+    height: 100px;
+
+}
+
+#home {
+    background-color: #F45F1F;
+    color: white;
+    font-size: 16px;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-weight: bold;
+}
+
+#home:hover {
+    background-color: #eace1a;
+}
+
+#home:active {
+    background-color: #cfa719;
+}
+
+/* Estilo para el footer
+footer {
+    background-color: black;
+    padding: 10px 0;
+    margin-top: 30px;
+    text-align: center;
+    color: white;
+}
+
+footer .footer-content h3 {
+    color: #FFFFFF;
+    font-size: 18px;
+} */

@@ -40,7 +40,7 @@ class CartController {
         try {
             const { cid } = req.params
             const cart = await this.cartService.findCartById(cid)
-            console.log(cart);
+            //console.log(cart);
             if (cart) {
                 return res.status(200).send({status: 'success', message: 'Carrito Encontrado exitosamente', data: cart})
             } else {

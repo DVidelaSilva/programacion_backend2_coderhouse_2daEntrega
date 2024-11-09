@@ -1,0 +1,48 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #F5F5F5
+    ;
+    background-size: cover;
+    font-family: sans-serif;
+    height: 100vh;
+    width: 100%;
+    margin-top: 20px;
+}
+
+
+
+.login-box h1 {
+    margin: 0;
+    padding: 0 0 20px;
+    text-align: center;
+    font-size: 50px;
+}
+
+.soon-img {
+    height: 500px;
+    width: 500px;
+    margin-left: 500px;
+}
+
+
+.login-box #btn-back {
+    border: none;
+    outline: none;
+    height: 40px;
+    background: #f45f1f;
+    color: white;
+    font-size: 18px;
+    border-radius: 20px;
+    width: 20%;
+    margin-top: 50px;
+    margin-bottom: 30px;
+
+}
+
+.login-box #btn-back:hover {
+    cursor: pointer;
+    background: #ffc107;
+    color: #000;
+}
+

@@ -1,3 +1,4 @@
+import { body } from "express-validator"
 import UserService from "../services/usersService.js"
 
 
@@ -63,6 +64,21 @@ class UserController {
             console.log(error);
         }
     }
+
+    putUserEmail = async (req, res) => {
+        try{
+            const {email, newRole} = req.body
+            const user = await this.userService.updateUserByEmail(email, newRole)
+            if (user) {
+                return res.status(201).send({status: 'success', message: 'Role Actualizado exitosamente', data: user})
+            } else {
+                return res.status(404).send({message: `Usuario id no encontrado`})
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    
     
 
     deleteUser = async (req, res) => {

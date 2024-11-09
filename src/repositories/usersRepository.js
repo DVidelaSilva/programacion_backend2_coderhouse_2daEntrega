@@ -68,6 +68,18 @@ class UserRepository {
         }
     }
 
+    updateUserByEmailInDB = async (email, newRole) => {
+        try{
+            //IN
+            const updateUser = await this.userDao.updateRole(email, newRole)
+            //OUT
+
+            return updateUser
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
 
     deleteUserByIdInDB = async (uid) => {
         try{

@@ -65,6 +65,22 @@ class UserDao {
             console.log(error);
         }  
     }
+
+    //* Actualizar un usuario por un Id
+    updateRole = async (email, newRole) => {
+        try {
+            //IN
+            const user = await userModel.findOneAndUpdate(
+                { email }, // Filtro por el email
+                { $set: { role: newRole } }, // Actualización del campo 'role'
+                { new: true } // Devuelve el documento actualizado
+            );
+            //OUT
+            return user
+        } catch (error){
+            console.log(error);
+        }  
+    }
     
     //* Eliminar un usuario por un Id
     delete = async (uid) => {

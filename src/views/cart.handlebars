@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HBS</title>
-    <link rel="stylesheet" href="/assets/css/homeProductsStyle.css">
+    <link rel="stylesheet" href="/assets/css/cartStyle.css">
 </head>
 <body>
 <!-- ********* MENU SUPERIOR *********-->
@@ -17,18 +17,17 @@
                 <img src="/assets/images/menu.png" class="menu-icono" alt="menu">
             </label>
             <nav class="navbar">
-                <ul>
-                    {{!-- <li><a href="#">Inicio</a></li>
-                    <li><a href="#">Servicios</a></li>
-                    <li><a href="#">Productos</a></li>
-                    <li><a href="#">Contacto</a></li> --}}
-                </ul>
+                {{!-- <ul>
+                   <li><a href="#">Mi Perfil</a></li>
+                   <li><a id="logout" >Logout</a></li>
+                </ul> --}}
             </nav>
             <!-- ********* CARRITO *********-->
             {{!-- <div>
                 <ul>
                     <li class="submenu">
                         <img id="img-carrito" src="assets/images/carrito.png" alt="car">
+                        <span id="cart-count" class="cart-count">0</span> 
                         <div id="carrito">
                             <table id="lista-carrito"
                                 <thead>
@@ -47,26 +46,10 @@
             </div> --}}
         </div>
 <!-- ********* BANDA SUPERIOR *********-->
-        <div class="header-content container">
-            <div class="header-txt">
-                <span>Bienvenido a nuestra Tienda</span>
-                <h1>Horror Book Store</h1>
-                <p>La mejor coleccion de libros de Terror,
-                    Misterio, y lo Oculto
-                </p>
-                <div class="butons">
-                    <a href="http://localhost:8080/login" class="btn-1">Login</a>
-                    <a href="http://localhost:8080/register" class="btn-1">Register</a>
-                </div>
-            </div>
-            <div class="header-img">
-                <img src="/assets/images/bag.jpg" alt="">
-            </div>
-        
-        </div>
+        <div class="header-content container"></div>
     </header>
  <!-- ********* BANDA CATEGORIAS *********-->
-    <section class="categories container">
+    {{!-- <section class="categories container">
 
         <div class="category-1 b1">
             <div class="category-txt">
@@ -101,15 +84,28 @@
             </div>
         </div>
         
-    </section>
+    </section> --}}
 <!-- ********* BANDA PRODUCTOS *********-->
     <main class="products container">
-        <h2>Productos</h2>
-
-        <div class="box-container" id="lista-1">
-        </div>
-
+        <h2>Carrito</h2>
+        <div class="box-container" id="lista-1"></div>
+        {{!-- <div class="btn-2" id="load-more">Cargar Mas</div> --}}
     </main>
+
+    <!-- Sección Total -->
+    {{!-- <section id="total-section" class="total-container">
+        <div class="total-box">
+            <h3>Total de productos:</h3>
+            <p id="total-quantity">0</p>
+            <h3>Total a pagar:</h3>
+            <p id="total-price">$0</p>
+        </div>
+    </section> --}}
+
+    <div class="contenedor-boton">
+    <button id="btn-pasar-a-comprar">Comprar</button>
+    <button id="btn-back">Volver</button>
+</div>
 <!-- ********* BANDA FOOTER *********-->
     <footer class="footer">
         <div class="footer-content container">
@@ -119,7 +115,7 @@
         </div>
     </footer>
 
-
-    <script src="/assets/js/homeProductScript.js"></script>
+    <script src="/assets/js/cartScripts.js"></script>
+     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>

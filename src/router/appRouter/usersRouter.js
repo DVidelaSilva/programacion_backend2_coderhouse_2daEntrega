@@ -13,6 +13,8 @@ userRouter.get('/:uid', validateUserId, handleValidationUserErrors, userControll
 userRouter.put('/:uid', validateUserId, validateUserUpdate, handleValidationUserErrors, userController.putUser)
 userRouter.delete('/:uid', validateUserId, handleValidationUserErrors, userController.deleteUser)
 
+userRouter.put('/update/role', userController.putUserEmail)
+
 
 
 

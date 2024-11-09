@@ -1,7 +1,7 @@
 body {
     margin: 0;
     padding: 0;
-    background: url(/assets/images/hbs.jpg) no-repeat center top;
+    background-color: #c6c6c6;
     background-size: cover;
     font-family: sans-serif;
     height: 100vh;
@@ -9,8 +9,8 @@ body {
 }
 
 .login-box {
-    width: 320px;
-    height: 460px;
+    width: 420px;
+    height: 450px;
     background: black;
     color: white;
     top: 50%;
@@ -19,6 +19,7 @@ body {
     transform: translate(-50%, -50%);
     box-sizing: border-box;
     padding: 70px 30px;
+    border: 2px solid #f45f1f;
 }
 
 .login-box .avatar {
@@ -28,6 +29,7 @@ body {
     position: absolute;
     top: -50px;
     left: calc(50% - 50px);
+    border: 2px solid #f45f1f;
 }
 
 .login-box h1 {
@@ -59,24 +61,6 @@ body {
     font-size: 16px;
 }
 
-#btn-login {
-    border: none;
-    outline: none;
-    height: 40px;
-    background: #f45f1f;
-    color: white;
-    font-size: 18px;
-    border-radius: 20px;
-    width: 100%;
-    margin-bottom: 20px;
-}
-
-#btn-login:hover {
-    cursor: pointer;
-    background: #ffc107;
-    color: #000;
-}
-
 .login-box #btn-register {
     border: none;
     outline: none;
@@ -86,11 +70,31 @@ body {
     font-size: 18px;
     border-radius: 20px;
     width: 100%;
-    margin-top: 0px;
-    margin-bottom: 20px;
+    margin-top: 40px;
+    margin-bottom: 30px;
 }
 
 .login-box #btn-register:hover {
+    cursor: pointer;
+    background: #ffc107;
+    color: #000;
+}
+
+.login-box #btn-back {
+    border: none;
+    outline: none;
+    height: 40px;
+    background: #f45f1f;
+    color: white;
+    font-size: 18px;
+    border-radius: 20px;
+    width: 70%;
+    margin-top: 0px;
+    margin-bottom: 30px;
+    margin-left: 55px;
+}
+
+.login-box #btn-back:hover {
     cursor: pointer;
     background: #ffc107;
     color: #000;
@@ -112,5 +116,3 @@ body {
     background: #ffc107;
     color: #000;
 }
-
-

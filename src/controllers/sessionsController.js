@@ -97,7 +97,10 @@ class SessionController {
         try {
 
             //console.log({ dataUser: req.user, message: 'datos sensibles user' });
-            res.send({ dataUser: req.user, message: 'datos sensibles user' });
+            // res.send({ dataUser: req.user, message: 'datos sensibles user' });
+            // res.redirect('/currentUserPremium')
+            console.log({ dataUser: req.user, message: 'datos sensibles user' });
+            //res.render('homeUsers.handlebars')
             res.redirect('/currentUserPremium')
         } catch (error) {
             console.log(error);
@@ -120,7 +123,7 @@ class SessionController {
 
 
 
-    getExtract = async (req, res) => {
+    getExtractUserId = async (req, res) => {
         try {
 
             // res.render('homeUsers.handlebars'), {
