@@ -1,5 +1,5 @@
-import { body, param, validationResult } from "express-validator";
-import mongoose from "mongoose";
+import { body, param, validationResult } from "express-validator"
+import mongoose from "mongoose"
 
 
 const validateUser = [
@@ -25,8 +25,9 @@ const validateUser = [
     body('role')
         .optional()
         .isIn(['user', 'user-premium', 'admin']).withMessage('El role debe ser uno de los siguientes: user, user-premium, admin.')
-    
 ]
+
+
 
 const validateUserUpdate = [
     body('first_name')
@@ -46,29 +47,33 @@ const validateUserUpdate = [
     body('role')
         .optional()
         .isIn(['user', 'user-premium', 'admin']).withMessage('El role debe ser uno de los siguientes: user, user-premium, admin.')
-    
 ]
 
-// Nueva validación para el ID
+
+
 const validateUserId = [
     param('uid')
         .exists().withMessage('El ID User es obligatorio.')
         .custom(value => {
             if (!mongoose.Types.ObjectId.isValid(value)) {
-                throw new Error('ID User no válido.');
+                throw new Error('ID User no válido.')
             }
-            return true;
+            return true
         })
 ]
+
 
 
 const handleValidationUserErrors = (req, res, next) => {
     const errors = validationResult(req)
     if(!errors.isEmpty()){
-        return res.status(400).send({errors: errors.array()});
+        return res.status(400).send({errors: errors.array()})
     }
     next()
 }
+
+
+
 
 
 export{

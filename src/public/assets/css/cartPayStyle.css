@@ -1,8 +1,8 @@
-/* Importación de las fuentes */
+
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Creepster&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-/* Reset global */
+
 * {
     margin: 0;
     padding: 0;
@@ -13,13 +13,12 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: #c6c6c6; /* Fondo gris */
+    background-color: #c6c6c6; 
 }
 
-/* Contenedor principal para la tarjeta */
 .receipt-container {
     width: 100%;
-    max-width: 700px; /* Limitar el ancho máximo */
+    max-width: 700px; 
     background-color: #fff;
     padding: 30px;
     border-radius: 10px;
@@ -28,54 +27,49 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 50px auto; /* Centrado vertical y horizontal con margen automático */
+    margin: 50px auto; 
 }
-/* Estilo para el título */
+
 .titulo {
     font-size: 50px;
     color: #111419;
-    font-family: 'Creepster', sans-serif; /* Fuente personalizada */
-    text-align: center;  /* Centrado horizontal */
-    margin-top: 100px;  /* Espacio superior */
-    margin-bottom: 30px; /* Espacio inferior */
+    font-family: 'Creepster', sans-serif; 
+    text-align: center;  
+    margin-top: 100px;  
+    margin-bottom: 30px; 
 }
-/* Logo */
+
 .logo-img {
     width: 80px;
     height: auto;
-    margin-bottom: 20px; /* Espacio debajo del logo */
+    margin-bottom: 20px; 
     margin-left: 30px;
     margin-top: 30px;
 }
 
-/* Título */
 .receipt-card h2 {
     font-size: 40px;
     margin-bottom: 20px;
     color: #111419;
-    font-family: 'Poppins', sans-serif; /* Fuente como la de los encabezados */
+    font-family: 'Poppins', sans-serif; 
 }
 
-/* Estilo para los párrafos dentro de la tarjeta */
 .receipt-card p {
     font-size: 20px;
     margin: 10px 0;
     color: #515557;
 }
 
-/* Resaltar información clave */
 .receipt-card span {
     font-weight: bold;
-    color: #F45F1F; /* Color de la marca */
+    color: #F45F1F;
 }
 
-/* Botón de "Home" */
 .home-button-container {
     margin-top: 20px;
-    /* Centrado automático en pantallas grandes y pequeños */
     display: flex;
-    justify-content: center; /* Centramos el botón horizontalmente */
-    width: 100%; /* Asegura que ocupe el 100% del contenedor disponible */
+    justify-content: center; 
+    width: 100%; 
 }
 
 #home {
@@ -88,8 +82,8 @@ body {
     cursor: pointer;
     transition: background-color 0.3s ease;
     font-weight: bold;
-    width: 50%; /* Puedes ajustar el tamaño del botón, en este caso ocupa el 50% del contenedor */
-    max-width: 300px; /* Ancho máximo del botón */
+    width: 50%; 
+    max-width: 300px; 
 }
 
 #home:hover {

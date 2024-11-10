@@ -1,4 +1,4 @@
-import ProductRepository from "../repositories/productsRepository.js";
+import ProductRepository from "../repositories/productsRepository.js"
 
 
 
@@ -8,6 +8,7 @@ class ProductService {
         this.productrepository = new ProductRepository()
 
     }
+
 
     createProduct = async (data) => {
         try {
@@ -28,7 +29,7 @@ class ProductService {
             //OUT
             return products
         } catch (error) {
-            console.log(error);
+            console.log(error)
         }
     }
 
@@ -40,7 +41,7 @@ class ProductService {
             //OUT
             return product
         } catch (error) {
-            console.log(error);
+            console.log(error)
         }
     }
 
@@ -52,7 +53,7 @@ class ProductService {
             //OUT
             return product
         } catch (error) {
-            console.log(error);
+            console.log(error)
         }
     }
 
@@ -64,7 +65,7 @@ class ProductService {
             //OUT
             return product
         } catch (error) {
-            console.log(error);
+            console.log(error)
         }
     }
 

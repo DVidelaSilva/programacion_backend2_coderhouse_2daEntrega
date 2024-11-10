@@ -1,5 +1,5 @@
-import { body, param, validationResult } from "express-validator";
-import mongoose from "mongoose";
+import { body, param, validationResult } from "express-validator"
+import mongoose from "mongoose"
 
 
 const validateRegister = [
@@ -22,9 +22,8 @@ const validateRegister = [
         .notEmpty().withMessage('El password es obligatoria.')
         .isLength({ min: 6 }).withMessage('El password debe tener al menos 6 caracteres.')
         .isString().withMessage('El password solo debe ser un String.'),
-
-    
 ]
+
 
 
 const validateLogin = [
@@ -34,17 +33,19 @@ const validateLogin = [
     body('password')
         .notEmpty().withMessage('El password es obligatoria.')
         .isString().withMessage('El password solo debe ser un String.'),
-    
 ]
+
 
 
 const handleValidationSessionErrors = (req, res, next) => {
     const errors = validationResult(req)
     if(!errors.isEmpty()){
-        return res.status(400).send({errors: errors.array()});
+        return res.status(400).send({errors: errors.array()})
     }
     next()
 }
+
+
 
 
 export{

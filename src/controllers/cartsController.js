@@ -1,4 +1,4 @@
-import CartService from "../services/cartsService.js";
+import CartService from "../services/cartsService.js"
 import ProductService from '../services/productsService.js'
 
 
@@ -18,8 +18,8 @@ class CartController {
             //OUT
             return res.status(201).send({status: 'success', message: 'Carrito Creado exitosamente', data: cart})
         } catch (error){
-            console.log(error);
-            return res.status(500).json({ message: 'Error al crear carrito' });
+            console.log(error)
+            return res.status(500).json({ message: 'Error al crear carrito' })
         }
     }
 
@@ -31,7 +31,8 @@ class CartController {
             //OUT
             return res.status(200).send({status: 'success', message: 'Carritos Encontrados exitosamente', data: carts})
         } catch (error){
-            return res.status(500).json({ message: 'Error al devolver carritos' });
+            console.log(error)
+            return res.status(500).json({ message: 'Error al devolver carritos' })
         }
     }
 
@@ -40,14 +41,14 @@ class CartController {
         try {
             const { cid } = req.params
             const cart = await this.cartService.findCartById(cid)
-            //console.log(cart);
             if (cart) {
                 return res.status(200).send({status: 'success', message: 'Carrito Encontrado exitosamente', data: cart})
             } else {
                 return res.status(404).send({message: `Carrito id ${cid} no encontrado`})
             }
         } catch (error) {
-            console.log(error);
+            console.log(error)
+            return res.status(500).json({ message: 'Error al devolver carrito' })
         }
     }
 
@@ -58,22 +59,22 @@ class CartController {
             const { cid, pid } = req.params
             const quantity = req.body.quantity || 1
             // Verificar que el carrito existe
-            const cart = await this.cartService.findCartById(cid);
+            const cart = await this.cartService.findCartById(cid)
             if (!cart) {
-                return res.status(404).send({ status: 'error', message: 'Carrito no encontrado' });
+                return res.status(404).send({ status: 'error', message: 'Carrito no encontrado' })
             }
             // Verificar que el producto existe
-            const product = await this.productService.findProductById(pid);
+            const product = await this.productService.findProductById(pid)
             if (!product) {
-                return res.status(404).send({ status: 'error', message: 'Producto no encontrado' });
+                return res.status(404).send({ status: 'error', message: 'Producto no encontrado' })
             }
             // Agregar el producto al carrito
-            const addCart = await this.cartService.saveProductToCart(cid, pid, quantity);
+            const addCart = await this.cartService.saveProductToCart(cid, pid, quantity)
 
-            return res.status(200).send({ status: 'success', message: 'Producto agregado al carrito', data: addCart });
+            return res.status(200).send({ status: 'success', message: 'Producto agregado al carrito', data: addCart })
         } catch (error) {
-            console.error(error);
-            return res.status(500).send({ status: 'error', message: 'Error al agregar producto al carrito' });
+            console.error(error)
+            return res.status(500).send({ status: 'error', message: 'Error al agregar producto al carrito' })
         }
     }
 
@@ -82,14 +83,14 @@ class CartController {
         try{
             const { cid, pid } = req.params
 
-            const cart = await this.cartService.findCartById(cid);
+            const cart = await this.cartService.findCartById(cid)
             if (!cart) {
-                return res.status(404).send({ status: 'error', message: 'Carrito no encontrado' });
+                return res.status(404).send({ status: 'error', message: 'Carrito no encontrado' })
             }
             // Verificar que el producto existe
-            const product = await this.productService.findProductById(pid);
+            const product = await this.productService.findProductById(pid)
             if (!product) {
-                return res.status(404).send({ status: 'error', message: 'Producto no encontrado' });
+                return res.status(404).send({ status: 'error', message: 'Producto no encontrado' })
             }
 
             const { quantity } = req.body
@@ -97,24 +98,24 @@ class CartController {
             const updateQuantity = await this.cartService.updateQuantityOfProductInCart(cid, pid, quantity)
             res.send({ status: 'success', message: 'Cantidad del producto actualizada en el carrito', data: updateQuantity })
         } catch (error) {
+            console.error(error)
             res.status(400).send({ status: 'error', message: error.message })
         }
     }
-
 
 
     deleteProductOfCart = async (req, res) => {
         try{
             const { cid, pid } = req.params
 
-            const cart = await this.cartService.findCartById(cid);
+            const cart = await this.cartService.findCartById(cid)
             if (!cart) {
-                return res.status(404).send({ status: 'error', message: 'Carrito no encontrado' });
+                return res.status(404).send({ status: 'error', message: 'Carrito no encontrado' })
             }
             // Verificar que el producto existe
-            const product = await this.productService.findProductById(pid);
+            const product = await this.productService.findProductById(pid)
             if (!product) {
-                return res.status(404).send({ status: 'error', message: 'Producto no encontrado' });
+                return res.status(404).send({ status: 'error', message: 'Producto no encontrado' })
             }
 
             const result = await this.cartService.deleteProductOfCart(cid, pid)
@@ -125,6 +126,7 @@ class CartController {
                 res.send({ status: 'success', message: 'Producto eliminado del carrito'})
             }
         } catch (error) {
+            console.error(error)
             res.status(400).send({ status: 'error', message: error.message })
         }
     }
@@ -134,14 +136,15 @@ class CartController {
         try {
             const { cid } = req.params
 
-            const cart = await this.cartService.findCartById(cid);
+            const cart = await this.cartService.findCartById(cid)
             if (!cart) {
-                return res.status(404).send({ status: 'error', message: 'Carrito no encontrado' });
+                return res.status(404).send({ status: 'error', message: 'Carrito no encontrado' })
             }
     
             const result = await this.cartService.deleteAllProductsOfCart(cid)
             res.send({ status: 'success', message: 'Productos eliminados del carrito', data: result })
         } catch (error) {
+            console.error(error)
             res.status(400).send({ status: 'error', message: error.message })
         }
 
@@ -152,14 +155,15 @@ class CartController {
         try {
             const { cid } = req.params
             const stockStatus = await this.cartService.findStockProductInCart(cid)
-            //console.log(cart);
+
             if (stockStatus) {
                 return res.status(200).send({status: 'success', message: 'Stock Status ', data: stockStatus})
             } else {
                 return res.status(404).send({message: `Carrito id ${cid} no encontrado`})
             }
         } catch (error) {
-            console.log(error);
+            console.log(error)
+            res.status(400).send({ status: 'error', message: error.message })
         }
     }
 
@@ -168,14 +172,15 @@ class CartController {
         try {
             const { cid } = req.params
             const stockStatus = await this.cartService.resumePurchaseCart(cid)
-            //console.log(cart);
+            
             if (stockStatus) {
                 return res.status(200).send({status: 'success', message: 'Resume Purchase', data: stockStatus})
             } else {
                 return res.status(404).send({message: `Carrito id ${cid} no encontrado`})
             }
         } catch (error) {
-            console.log(error);
+            console.log(error)
+            res.status(400).send({ status: 'error', message: error.message })
         }
     }
 
@@ -185,14 +190,15 @@ class CartController {
         try {
             const { cid, uid} = req.params
             const payTicket = await this.cartService.payCart(cid, uid)
-            //console.log(cart);
+
             if (payTicket) {
                 return res.status(200).send({status: 'success', message: 'Pago Realizado exitosamente', data: payTicket})
             } else {
                 return res.status(404).send({message: `No se pudo procesar el pago para el carrito id ${cid}`})
             }
         } catch (error) {
-            console.log(error);
+            console.log(error)
+            res.status(400).send({ status: 'error', message: error.message })
         }
     }
 

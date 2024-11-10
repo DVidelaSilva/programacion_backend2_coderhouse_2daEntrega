@@ -1,8 +1,8 @@
-import { Router } from "express";
-import ProductController from "../../controllers/productsController.js";
-import { validateProduct, validateProductUpdate, validateProductId, handleValidationProductErrors } from "../../middlewares/validacionesMiddlewares/productValidation.middlewares.js";
+import { Router } from "express"
+import ProductController from "../../controllers/productsController.js"
+import { validateProduct, validateProductUpdate, validateProductId, handleValidationProductErrors } from "../../middlewares/validacionesMiddlewares/productValidation.middlewares.js"
 
-const productRouter = Router();
+const productRouter = Router()
 
 const productController = new ProductController()
 
@@ -16,4 +16,4 @@ productRouter.delete('/:pid', validateProductId, handleValidationProductErrors, 
 
 
 
-export default productRouter;
+export default productRouter

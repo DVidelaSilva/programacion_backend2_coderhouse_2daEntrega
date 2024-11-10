@@ -1,15 +1,16 @@
-import UserRepository from "../repositories/usersRepository.js";
+import UserRepository from "../repositories/usersRepository.js"
 import {createHash, isValidPassword} from '../utils/hash.bcrypt.js'
-import { generateToken } from "../middlewares/jwt.middlewares.js";
-import CartRepository from "../repositories/cartsRepository.js";
+import { generateToken } from "../middlewares/jwt.middlewares.js"
+import CartRepository from "../repositories/cartsRepository.js"
+
 
 class SessionService {
 
     constructor() {
-        this.userRepository = new UserRepository();
+        this.userRepository = new UserRepository()
         this.cartRepository = new CartRepository()
-
     }
+
 
     sessionRegisterUser = async (data) => {
             const {first_name, last_name, email, age, password} = data
@@ -21,7 +22,6 @@ class SessionService {
             const cart = await this.cartRepository.createCartInDB(data)  
             const userCartId = cart.id
 
-            
             const newUser = {
                 first_name,
                 last_name,
@@ -31,7 +31,7 @@ class SessionService {
                 userCartId: userCartId
             }
 
-            const user = await this.userRepository.createUserInDB(newUser); 
+            const user = await this.userRepository.createUserInDB(newUser)
             return user
     }
 
@@ -68,7 +68,6 @@ class SessionService {
     }
 
 
-
     sessionGithubLogin = async (user) => {
 
         const token = generateToken({id: user._id, role: user.role})
@@ -78,7 +77,6 @@ class SessionService {
             httpOnly: true
         }
         return{ token, cookieOptions }
-
     }
 
 

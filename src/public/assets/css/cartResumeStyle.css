@@ -81,40 +81,6 @@ img {
     display: none;
 }
 
-.submenu {
-    position: relative;
-}
-
-.submenu #carrito {
-    display: none;
-}
-
-.submenu:hover #carrito {
-    display: block;
-    position: absolute;
-    right: 0;
-    backdrop-filter: blur(10px);
-    top: 100%;
-    z-index: 1;
-    background-color: #4E4B5076;
-    padding: 20px;
-    min-width: 400px;
-}
-
-#img-carrito {
-    margin-top: 20px;
-    width: 40px; 
-    height: 40px;
-  }
-
-table {
-    width: 100%;
-}
-
-th, td {
-    color: #FFFFFF;
-}
-
 .borrar {
     background-color: #9BCE21;
     border-radius: 50%;
@@ -139,15 +105,6 @@ th, td {
     margin-right: 35px;
 }
 
-span {
-    color: #F45F1F;
-    font-size: 17px;
-    font-weight: 600;
-    display: block;
-    margin-bottom: 25px;
-    margin-top: 70px;
-}
-
 .header-txt h1 {
     font-size: 70px;
     text-transform: capitalize;
@@ -164,92 +121,6 @@ span {
 
 .butons {
     display: flex;
-}
-
-.btn-1 {
-    display: inline-block;
-    padding: 13px 25px;
-    background-color: #F45F1F;
-    margin-right: 20px;
-    color: black;
-    font-weight: bold; /* Texto en negrita */
-    text-transform: capitalize;
-    margin-bottom: 100px;
-    border-radius: 10px;
-}
-
-.header-img {
-    flex-basis: 70%;
-    text-align: right;
-}
-
-.header-img img {
-    height: 500px;
-}
-
-.categories {
-    margin-top: 100px;
-    padding: 0px 0;
-    display: flex;
-    justify-content: space-between;
-    background-color: #c6c6c6; /* Gris */
-}
-
-.category-1 {
-    flex-basis: calc(33.3% - 20px);
-    padding: 10px 15px;
-    margin-right: 20px; 
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.b1 {
-    background-color: #111419;
-}
-
-.b2 {
-    background-color: #111419;
-}
-
-.b3 {
-    background-color: #111419;
-}
-
-.b4 {
-    background-color: #111419;
-}
-
-.category-txt {
-    flex-basis: 50%;
-}
-
-.category-txt h3 {
-    color: #FFFFFF;
-    font-size: 20px;
-}
-
-.category-txt a {
-    color: #FFFFFF;
-}
-
-.category-img1 {
-    flex-basis: 30%;
-}
-
-.category-img2 {
-    width: 200px;
-    height: auto;
-}
-
-.category-img3 {
-    width: 120px;
-    height: auto;
-}
-
-.category-img4 {
-    width: 200px;
-    height: auto;
 }
 
 .products {
@@ -368,7 +239,6 @@ h2 {
     text-align: center;
 }
 
-/* Estilos para la sección Total */
 #total-section {
     display: flex;
     justify-content: space-between;
@@ -405,23 +275,22 @@ h2 {
     font-weight: bold;
 }
 
-/* Caja de pago */
+
 .payment-box {
-    width: 35%; /* La tarjeta de pago ocupa el 35% del ancho */
+    width: 35%; 
     padding: 20px;
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     display: flex;
-    flex-direction: column; /* Para que los botones estén en columna (uno sobre otro) */
+    flex-direction: column; 
     justify-content: center;
     align-items: center;
-    row-gap: 10px; /* Espacio entre los botones */
+    row-gap: 10px; 
 }
 
-/* Estilo de los botones */
 .payment-box button {
-    background-color: #F45F1F; /* Verde para indicar pago */
+    background-color: #F45F1F; 
     color: white;
     font-size: 25px;
     font-weight: bold;
@@ -430,20 +299,18 @@ h2 {
     border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    width: 100%; /* Los botones ocupan el 100% del contenedor */
+    width: 100%; 
 }
 
-/* Efecto hover de los botones */
 .payment-box button:hover {
-    background-color: #FF9000; /* Efecto hover */
+    background-color: #FF9000; 
 }
 
-/* Efecto clic de los botones */
 .payment-box button:active {
-    background-color: #FF9000; /* Efecto clic */
+    background-color: #FF9000; 
 }
 
-/* Estilo específico del botón de retroceso */
+
 #btn-back {
     border: none;
     outline: none;
@@ -452,12 +319,11 @@ h2 {
     color: white;
     font-size: 18px;
     border-radius: 20px;
-    width: 100%; /* Hacer que el botón de retroceso ocupe todo el ancho */
+    width: 100%; 
     margin-top: 10px;
     margin-bottom: 15px;
 }
 
-/* Efecto hover del botón de retroceso */
 #btn-back:hover {
     cursor: pointer;
     background: #ffc107;

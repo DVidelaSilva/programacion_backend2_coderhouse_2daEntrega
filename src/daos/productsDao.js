@@ -1,8 +1,8 @@
-import productModel from "../models/productsModel.js";
+import productModel from "../models/productsModel.js"
 
 class ProductDao {
     
-    //* Crear un producto en BD
+
     create = async (data) => {
         try {
             //IN
@@ -10,12 +10,11 @@ class ProductDao {
             //OUT
             return product
         } catch (error){
-            console.log(error);
+            console.log(error)
         }  
     }    
 
 
-    //* Buscar todos los productos en BD
     get = async () => {
         try {
             //IN
@@ -23,12 +22,11 @@ class ProductDao {
             //OUT
             return products
         } catch (error){
-            console.log(error);
+            console.log(error)
         }  
     }
 
 
-    //* Buscar producto por un Id
     getById = async (pid) => {
         try {
             //IN
@@ -36,12 +34,11 @@ class ProductDao {
             //OUT
             return product
         } catch (error){
-            console.log(error);
+            console.log(error)
         }  
     }
 
     
-    //* Actualizar un producto por un Id
     update = async (pid, data) => {
         try {
             //IN
@@ -49,11 +46,11 @@ class ProductDao {
             //OUT
             return product
         } catch (error){
-            console.log(error);
+            console.log(error)
         }  
     }
     
-    //* Eliminar un producto por un Id
+
     delete = async (pid) => {
         try {
             //IN
@@ -61,7 +58,7 @@ class ProductDao {
             //OUT
             return product
         } catch (error){
-            console.log(error);
+            console.log(error)
         }  
     } 
 }

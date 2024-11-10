@@ -38,9 +38,6 @@ const initializePassport = () => {
 }
 
 
-
-
-
 //? Estrategia GitHub
 
     passport.use("github", new GithubStrategy(

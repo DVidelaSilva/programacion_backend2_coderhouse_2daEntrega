@@ -12,6 +12,4 @@ export default {
     github_callback_url: process.env.GITHUB_CALLBACK_URL,
     gmail_user: process.env.GMAIL_USER,
     gmail_pass: process.env.GMAIL_PASS
-
-
 }

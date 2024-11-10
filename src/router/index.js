@@ -1,9 +1,9 @@
-import { Router } from "express";
+import { Router } from "express"
 
 import userRouter from './appRouter/usersRouter.js'
-import productRouter from "./appRouter/productsRouter.js";
-import sessionRouter from "./appRouter/sessionsRouter.js";
-import cartRouter from "./appRouter/cartsRouter.js";
+import productRouter from "./appRouter/productsRouter.js"
+import sessionRouter from "./appRouter/sessionsRouter.js"
+import cartRouter from "./appRouter/cartsRouter.js"
 import viewsRouter from './appRouter/viewsRouter.js'
 import ticketRouter from './appRouter/ticketsRouter.js'
 

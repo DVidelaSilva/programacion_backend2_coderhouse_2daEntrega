@@ -2,7 +2,7 @@
 // logout
 function logoutUser() {
   document.getElementById('logout').addEventListener('click', function(event) {
-    event.preventDefault(); 
+    event.preventDefault()
 
     // Fetch
     fetch('http://localhost:8080/api/sessions/logout', {
@@ -21,32 +21,31 @@ function logoutUser() {
           icon: 'success',
           confirmButtonText: 'OK'
         }).then(() => {
-          window.location.href = 'http://localhost:8080';  // Redirigir al inicio
-        });
+          window.location.href = 'http://localhost:8080'
+        })
       } else {
         Swal.fire({
           title: 'Error',
           text: 'Error al cerrar sesión: ' + data.message,
           icon: 'error',
           confirmButtonText: 'OK'
-        });
+        })
       }
     })
     .catch(error => {
-      console.error('Error:', error);
+      console.error('Error:', error)
       Swal.fire({
         title: 'Error',
         text: 'Ocurrió un error al intentar cerrar sesión.',
         icon: 'error',
         confirmButtonText: 'OK'
-      });
-    });
-  });
+      })
+    })
+  })
 }
 
 //OBTENER ID USUARIO
 async function idUser() {
-
   try {
       // Fetch
       const response = await fetch('http://localhost:8080/api/sessions/extract', {
@@ -55,15 +54,14 @@ async function idUser() {
           'Content-Type': 'application/json',
         },
       })
-      const data = await response.json();
+      const data = await response.json()
   
       if (data.dataUser && data.dataUser.id) {
-        console.log(data.dataUser.id);
-          return data.dataUser.id;  
+          return data.dataUser.id  
       } else {
-          console.error('Error: No se encontró el ID del usuario');
-          alert('No se pudo obtener el ID del usuario.');
-          return null;  
+          console.error('Error: No se encontró el ID del usuario')
+          alert('No se pudo obtener el ID del usuario.')
+          return null
       }
     } catch(error) {
         console.error('Error:', error)
@@ -71,7 +69,6 @@ async function idUser() {
         return null
       }
 }
-
 
 //OBTENER ID CART
 async function idCart(userId) {
@@ -85,16 +82,15 @@ async function idCart(userId) {
       headers: {
         'Content-Type': 'application/json',
       },
-    });
-    console.log(response);
+    })
+
     if (!response.ok) {
       throw new Error(`Error en la respuesta de la API: ${response.statusText}`)
     }
 
     const data = await response.json()
-    console.log('Respuesta de la API de usuario:', data);
+
     if (data.status === 'success' && data.data.userCartId) {
-      console.log(data.data.userCartId);
       return data.data.userCartId
     } else {
       console.error('No se encontró el userCartId en la respuesta')
@@ -111,8 +107,7 @@ async function idCart(userId) {
 // AGREGA PRODUTO AL CARRITO
 async function addToCart(cartId, productId) {
   try {
-      
-      const url = `http://localhost:8080/api/carts/${cartId}/products/${productId}`;
+      const url = `http://localhost:8080/api/carts/${cartId}/products/${productId}`
       const response = await fetch(url, {
           method: 'POST',  
           headers: {
@@ -131,7 +126,6 @@ async function addToCart(cartId, productId) {
           alert('No se pudo agregar el producto al carrito.')
       }
   } catch (error) {
-      // Manejo de errores
       console.error('Error:', error)
       alert('Ocurrió un error al intentar agregar el producto al carrito.')
   }
@@ -145,23 +139,20 @@ async function updateCartCount(cartId) {
         headers: {
           'Content-Type': 'application/json',
         },
-      });
+      })
   
       if (!response.ok) {
         throw new Error(`Error en la respuesta de la API: ${response.data.totalQuantity}`)
       }
   
-      const data = await response.json();
-      console.log('DATA CONTADOR', data);
-      
-      // Verifica que la respuesta tiene un status 'success' y totalQuantity
+      const data = await response.json()
+
       if (data.status === 'success' && data.data.totalQuantity !== undefined) {
-        console.log('Total Quantity:', data.data.totalQuantity);  // Verificamos el valor de totalQuantity
-        return data.data.totalQuantity;  // Retornamos el totalQuantity para actualizar el contador
+        return data.data.totalQuantity
       } else {
-        console.error('No se encontró totalQuantity en la respuesta');
-        alert('No se pudo obtener el totalQuantity del carrito.');
-        return null;
+        console.error('No se encontró totalQuantity en la respuesta')
+        alert('No se pudo obtener el totalQuantity del carrito.')
+        return null
       }
     } catch (error) {
       console.error('Error en cartOfUserId:', error)
@@ -171,20 +162,17 @@ async function updateCartCount(cartId) {
 }
 
 
-
-
 // CARGAR PRODUCTOS 
 document.addEventListener('DOMContentLoaded', async function() {
     try {
 
-      const cartCountElement = document.getElementById('cart-count');
-      const userId = await idUser();
-      const cartId = await idCart(userId);
-
+      const cartCountElement = document.getElementById('cart-count')
+      const userId = await idUser()
+      const cartId = await idCart(userId)
 
       if (cartId) {
-          const quantity = await updateCartCount(cartId);
-          cartCountElement.textContent = quantity;
+          const quantity = await updateCartCount(cartId)
+          cartCountElement.textContent = quantity
       }
       //Fetch
         const response = await fetch('http://localhost:8080/api/products')
@@ -195,15 +183,14 @@ document.addEventListener('DOMContentLoaded', async function() {
             const productContainer = document.getElementById('lista-1')
             productContainer.innerHTML = ''
 
-                        // Formato para precios en moneda chilena
-                        const numberFormat = new Intl.NumberFormat('es-CL', {
-                          style: 'currency',
-                          currency: 'CLP',
-                          minimumFractionDigits: 0,  // Sin decimales
-                      });
+            const numberFormat = new Intl.NumberFormat('es-CL', {
+              style: 'currency',
+              currency: 'CLP',
+              minimumFractionDigits: 0,  // Sin decimales
+            })
 
             products.forEach(product => {
-              const formattedPrice = numberFormat.format(product.price);
+              const formattedPrice = numberFormat.format(product.price)
                 const productHTML = `
                  <div class="box">
                         <img src="${product.thumbnails}" alt="${product.title}">
@@ -211,7 +198,6 @@ document.addEventListener('DOMContentLoaded', async function() {
                             <h3>${product.autor}</h3>
                             <p>${product.title}</p>
                             <p class="precio">${formattedPrice}</p>
-                            <!-- Aquí agregamos el _id de MongoDB al botón como un data-id -->
                             <a class="agregar-carrito btn-3" data-id="${product.id}">Agregar al carrito</a>
                         </div>
                     </div>
@@ -232,41 +218,43 @@ document.getElementById('lista-1').addEventListener('click', async function(even
   const cartCountElement = document.getElementById('cart-count')
 
   if (event.target.classList.contains('agregar-carrito')) {
-      const productoId = event.target.getAttribute('data-id');
-      const userId = await idUser();
-      const cartId = await idCart(userId);
+      const productoId = event.target.getAttribute('data-id')
+      const userId = await idUser()
+      const cartId = await idCart(userId)
       
       try {
-        const result = await addToCart(cartId, productoId);
+        const result = await addToCart(cartId, productoId)
         const quantity = await updateCartCount(cartId)
         cartCountElement.textContent = quantity
     } catch (error) {
-        console.error('Error al agregar al carrito:', error);
+        console.error('Error al agregar al carrito:', error)
     }
   }
 })
 
-// Actualizar contador al cargar la página
+
 document.addEventListener('DOMContentLoaded', async function() {
-  const cartCountElement = document.getElementById('cart-count');
-  const userId = await idUser();
-  const cartId = await idCart(userId);
+  const cartCountElement = document.getElementById('cart-count')
+  const userId = await idUser()
+  const cartId = await idCart(userId)
 
   if (cartId) {
-      const quantity = await updateCartCount(cartId);
-      cartCountElement.textContent = quantity;
+      const quantity = await updateCartCount(cartId)
+      cartCountElement.textContent = quantity
   } else {
-      cartCountElement.textContent = 0;  // Si no se pudo obtener el cartId, mostrar 0
+      cartCountElement.textContent = 0
   }
-});
+})
 
-// BOTON CARRITO
+
 document.getElementById('img-carrito').addEventListener('click', function() {
-  window.location.href = '/cart';  
-});
+  window.location.href = '/cart'
+})
 
 document.getElementById('soon').addEventListener('click', function(event) {
-  window.location.href = '/soon'; 
+  window.location.href = '/soon'
 })
-logoutUser();
-idUser();
+
+
+logoutUser()
+idUser()

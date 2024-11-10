@@ -1,13 +1,12 @@
-import { Router } from "express";
-import SessionController from "../../controllers/sessionsController.js";
-import { validateRegister , validateLogin, handleValidationSessionErrors} from "../../middlewares/validacionesMiddlewares/sessionValidation.middlewares.js";
-
-import passport from "passport";
+import { Router } from "express"
+import SessionController from "../../controllers/sessionsController.js"
+import { validateRegister , validateLogin, handleValidationSessionErrors} from "../../middlewares/validacionesMiddlewares/sessionValidation.middlewares.js"
+import passport from "passport"
 import {passportCall} from '../../middlewares/passportCall.middlewares.js'
 import { authorization } from '../../middlewares/authorization.middlewares.js'
 
 
-const sessionRouter = Router();
+const sessionRouter = Router()
 
 const sessionController = new SessionController()
 
@@ -20,9 +19,6 @@ sessionRouter.get('/githubcallback', passport.authenticate('github', { scope: ['
 sessionRouter.get('/currentUser', passportCall('jwt'), sessionController.getSessionCurrentUser)
 sessionRouter.get('/currentUserPremium', passportCall('jwt'), authorization('user-premium'), sessionController.getSessionCurrentUserPremium)
 sessionRouter.get('/currentAdmin', passportCall('jwt'), authorization('admin'), sessionController.getSessionCurrentUserAdmin)
-
-
-
 sessionRouter.get('/extract', passportCall('jwt'), sessionController.getExtractUserId)
 
 
@@ -30,5 +26,5 @@ sessionRouter.get('/extract', passportCall('jwt'), sessionController.getExtractU
 
 
 
-export default sessionRouter;
+export default sessionRouter
 

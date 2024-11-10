@@ -1,6 +1,7 @@
-import { Schema, model } from "mongoose";
+import { Schema, model } from "mongoose"
 
 const cartsCollection = 'carts'
+
 
 const cartsSchema = new Schema ({
 
@@ -12,12 +13,14 @@ const cartsSchema = new Schema ({
        quantity: Number,
         _id: false 
     }],
+
     totalQuantity: {
         type: Number,
         default: 0
     }
 
 })
+
 
 
 const cartModel = model(cartsCollection, cartsSchema)

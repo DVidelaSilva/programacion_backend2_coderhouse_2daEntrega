@@ -2,6 +2,7 @@ import {Schema, model} from 'mongoose'
 
 const productsCollection = 'products'
 
+
 const productSchema = new Schema ({
 
     title: {
@@ -43,6 +44,7 @@ const productSchema = new Schema ({
 
 
 const productModel = model(productsCollection, productSchema)
+
 
 
 export default productModel

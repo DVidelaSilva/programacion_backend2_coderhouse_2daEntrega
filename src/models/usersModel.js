@@ -2,11 +2,11 @@ import {Schema, model} from 'mongoose'
 
 const usersCollection = 'users'
 
+
 const userSchema = new Schema({
     first_name: {
         type: String,
         require: true
-        
     },
 
     last_name: {
@@ -42,6 +42,9 @@ const userSchema = new Schema({
     }
 })
 
+
 const userModel = model(usersCollection, userSchema)
+
+
 
 export default userModel

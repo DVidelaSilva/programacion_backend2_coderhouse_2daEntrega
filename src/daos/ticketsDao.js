@@ -1,9 +1,9 @@
-import ticketModel from "../models/ticketModel.js";
+import ticketModel from "../models/ticketModel.js"
 
 
 class TicketDao {
 
-    //* Crear un usuario en BD
+
     create = async (data) => {
         try {
             //IN
@@ -11,20 +11,19 @@ class TicketDao {
             //OUT
             return ticket
         } catch (error){
-            console.log(error);
+            console.log(error)
         }  
     }   
 
 
-    //* Buscar usuario por un Id
     getById = async (tid) => {
         try {
             //IN
-            const ticket = await ticketModel.findById({_id: uid})
+            const ticket = await ticketModel.findById(tid)
             //OUT
             return ticket
         } catch (error){
-            console.log(error);
+            console.log(error)
         }  
     }
 

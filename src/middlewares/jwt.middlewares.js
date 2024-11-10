@@ -6,8 +6,8 @@ const generateToken = user => jwt.sign(user, envConfig.private_key_jwt, {expires
 
 const authTokenMiddleware = (req, res, next) => {
     const authHeader = req.headers["authorization"]
-    console.log("Authorization Header:", authHeader);
-    console.log(authHeader);
+    // console.log("Authorization Header:", authHeader);
+    // console.log(authHeader);
 
     if(!authHeader)
         return res
@@ -16,17 +16,18 @@ const authTokenMiddleware = (req, res, next) => {
     
         const token = authHeader.split(' ')[1]
         if (!token) {
-            return res.status(401).send({ status: 'error', error: 'Token missing' });
+            return res.status(401).send({ status: 'error', error: 'Token missing' })
         }
         jwt.verify(token, envConfig.private_key_jwt, (error, usuarioExtraidoDelToken) => {
             if (error) {
-                return res.status(403).send({ status: 'error', error: 'Token invalid or expired' });
+                return res.status(403).send({ status: 'error', error: 'Token invalid or expired' })
             }
             req.user = usuarioExtraidoDelToken
             next()
         })
-    
     }
+
+
 
 export {
     generateToken,

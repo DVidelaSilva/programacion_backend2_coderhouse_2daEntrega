@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Creepster&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
+
 * {
     margin: 0;
     padding: 0;
@@ -35,33 +36,22 @@ img {
     padding: 0 0 0 0;
 }
 
-/* .menu {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;  
-} */
-
 .menu {
-    position: fixed; /* Mantener el navbar fijo */
+    position: fixed; 
     top: 0;
     left: 0;
     right: 0;
     z-index: 1000;
     background-color: #c6c6c6;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 8px 0;  /* Reduce el padding superior e inferior */
+    padding: 8px 0;  
     max-width: 1350px;
     width: 100%;
-    margin: 0 auto;  /* Centrar el menú */
+    margin: 0 auto;  
     display: flex;
-    justify-content: space-between;  /* Para mantener el logo y el navbar alineados */
-    align-items: center;  /* Centrar verticalmente el contenido */
+    justify-content: space-between; 
+    align-items: center; 
 }
-
 
 .logo-img {
     width: 80px; 
@@ -337,7 +327,7 @@ h2 {
     padding: 11px 35px;
     border-radius: 25px;
     color: black;
-    font-weight: bold; /* Texto en negrita */
+    font-weight: bold; 
     font-size: 16px;
     cursor: pointer;
     box-shadow: 0px 10px rgba(0,0,0,0.2);
@@ -440,7 +430,7 @@ h2 {
         text-align: center;
     }
 
-    /* Header */
+
     .header {
         padding: 50px 0;
         flex-direction: column;
@@ -476,7 +466,7 @@ h2 {
         font-size: 16px;
     }
 
-    /* Categories */
+
     .categories {
         padding: 30px;
         flex-direction: column;
@@ -505,7 +495,7 @@ h2 {
         text-align: center;
     }
 
-    /* Productos */
+
     .products {
         padding: 20px;
     }
@@ -552,7 +542,7 @@ h2 {
         color: #ff9100 !important;
     }
 
-    /* Botones */
+
     .btn-2, .btn-3 {
         background-color: #F45F1F;
         margin-top: 50px;
@@ -560,7 +550,7 @@ h2 {
         padding: 11px 35px;
         border-radius: 25px;
         color: black;
-        font-weight: bold; /* Texto en negrita */
+        font-weight: bold; 
         font-size: 16px;
         cursor: pointer;
         box-shadow: 0px 10px rgba(0,0,0,0.2);
@@ -580,7 +570,7 @@ h2 {
     }
 }
 
-/* Para pantallas aún más pequeñas como móviles (max-width: 600px) */
+
 @media (max-width: 600px) {
     .header-txt h1 {
         font-size: 30px;

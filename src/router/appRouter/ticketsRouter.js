@@ -1,5 +1,5 @@
-import { Router } from "express";
-import TicketController from "../../controllers/ticketController.js";
+import { Router } from "express"
+import TicketController from "../../controllers/ticketController.js"
 
 
 const ticketRouter = Router()

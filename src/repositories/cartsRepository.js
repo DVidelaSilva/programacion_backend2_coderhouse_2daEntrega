@@ -1,5 +1,5 @@
-import CartDao from "../daos/cartsDao.js";
-import CartDto from "../dto/cartsDto.js";
+import CartDao from "../daos/cartsDao.js"
+import CartDto from "../dto/cartsDto.js"
 
 
 class CartRepository {
@@ -8,6 +8,7 @@ class CartRepository {
         this.cartDao = new CartDao()
     }
 
+
     createCartInDB = async (data) => {
         try {
             // IN
@@ -15,7 +16,7 @@ class CartRepository {
             //OUT
             return new CartDto(cart)
         } catch (error){
-            console.log(error);
+            console.log(error)
         }
     }
 
@@ -27,7 +28,7 @@ class CartRepository {
             //OUT
             return carts.map((cart) => new CartDto(cart))
         } catch (error) {
-            console.log(error);
+            console.log(error)
         }
     }
 
@@ -42,7 +43,6 @@ class CartRepository {
             console.log(error)
         }
     } 
-
 
 
 }

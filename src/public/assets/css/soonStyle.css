@@ -10,8 +10,6 @@ body {
     margin-top: 20px;
 }
 
-
-
 .login-box h1 {
     margin: 0;
     padding: 0 0 20px;
@@ -25,7 +23,6 @@ body {
     margin-left: 500px;
 }
 
-
 .login-box #btn-back {
     border: none;
     outline: none;
@@ -37,7 +34,6 @@ body {
     width: 20%;
     margin-top: 50px;
     margin-bottom: 30px;
-
 }
 
 .login-box #btn-back:hover {

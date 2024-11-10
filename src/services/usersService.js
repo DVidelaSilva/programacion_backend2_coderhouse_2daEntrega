@@ -1,7 +1,7 @@
 
-import UserRepository from "../repositories/usersRepository.js";
+import UserRepository from "../repositories/usersRepository.js"
 import {createHash} from '../utils/hash.bcrypt.js'
-import CartRepository from "../repositories/cartsRepository.js";
+import CartRepository from "../repositories/cartsRepository.js"
 
 class UserService {
 
@@ -14,11 +14,7 @@ class UserService {
         try {
             //IN
             const cart = await this.cartRepository.createCartInDB(data)  
-
             const userCartId = cart.id
-
-            console.log(userCartId);
-
             const {first_name, last_name, email, age, password, role} = data
 
             const newUser = {
@@ -31,9 +27,7 @@ class UserService {
                 userCartId: userCartId
             }
 
-            const user = await this.userRepository.createUserInDB(newUser); 
-            
-            
+            const user = await this.userRepository.createUserInDB(newUser)
             
             //OUT
             return user
@@ -46,11 +40,11 @@ class UserService {
     findAllUsers = async () => {
         try {
             //IN
-            const users = await this.userRepository.findAllUsersInDB();
+            const users = await this.userRepository.findAllUsersInDB()
             //OUT
             return users
         } catch (error) {
-            console.log(error);
+            console.log(error)
         }
     }
 
@@ -62,7 +56,7 @@ class UserService {
             //OUT
             return user
         } catch (error) {
-            console.log(error);
+            console.log(error)
         }
     }
 
@@ -74,7 +68,7 @@ class UserService {
             //OUT
             return user
         } catch (error) {
-            console.log(error);
+            console.log(error)
         }
     }
 
@@ -82,15 +76,15 @@ class UserService {
         try{
             //IN
             const user = await this.userRepository.updateUserByEmailInDB(email, newRole)
-            // Si el usuario no fue encontrado
+
             if (!user) {
-                console.log('Usuario no encontrado');
-                return null; // O puedes lanzar un error
+                console.log('Usuario no encontrado')
+                return null
             }
             //OUT
             return user
         } catch (error) {
-            console.log(error);
+            console.log(error)
         }
     }
 
@@ -102,7 +96,7 @@ class UserService {
             //OUT
             return user
         } catch (error) {
-            console.log(error);
+            console.log(error)
         }
     }
 

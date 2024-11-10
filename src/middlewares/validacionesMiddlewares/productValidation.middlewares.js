@@ -1,5 +1,5 @@
-import { body, param, validationResult } from "express-validator";
-import mongoose from "mongoose";
+import { body, param, validationResult } from "express-validator"
+import mongoose from "mongoose"
 
 
 const validateProduct = [
@@ -37,6 +37,8 @@ const validateProduct = [
         .isString().withMessage('El thumbnails solo debe ser un String.'),
 ]
 
+
+
 const validateProductUpdate = [
     body('title')
         .isLength({max: 50}).withMessage('El title no puede exceder los 50 caracteres')
@@ -63,29 +65,32 @@ const validateProductUpdate = [
         .isString().withMessage('El category solo debe ser un String.'),
     body('thumbnails')
         .isString().withMessage('El thumbnails solo debe ser un String.'),
-    
 ]
 
-// Nueva validación para el ID
+
+
 const validateProductId = [
     param('pid')
         .exists().withMessage('El ID Product es obligatorio.')
         .custom(value => {
             if (!mongoose.Types.ObjectId.isValid(value)) {
-                throw new Error('ID Product no válido.');
+                throw new Error('ID Product no válido.')
             }
-            return true;
+            return true
         })
 ]
+
 
 
 const handleValidationProductErrors = (req, res, next) => {
     const errors = validationResult(req)
     if(!errors.isEmpty()){
-        return res.status(400).send({errors: errors.array()});
+        return res.status(400).send({errors: errors.array()})
     }
     next()
 }
+
+
 
 
 export{

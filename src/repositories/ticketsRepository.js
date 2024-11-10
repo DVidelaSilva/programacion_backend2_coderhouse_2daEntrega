@@ -1,4 +1,4 @@
-import TicketDao from "../daos/ticketsDao.js";
+import TicketDao from "../daos/ticketsDao.js"
 
 
 class TicketRepository {
@@ -10,26 +10,14 @@ class TicketRepository {
     createTicketInDB = async (data) => {
         try {
             // IN
-            const ticket = await this.ticketDao.create(data);
+            const ticket = await this.ticketDao.create(data)
             //OUT
             return ticket
         } catch (error){
-            console.log(error);
+            console.log(error)
         }
     }
 
-
-    findTicketByIdInDB = async (tid) => {
-        try {
-            //IN
-            const ticket = await this.ticketDao.getById(pid)
-            //OUT
-            //return new ProductDto(product)
-            return ticket
-        } catch (error) {
-            console.log(error)
-        }
-    } 
 }
 
 

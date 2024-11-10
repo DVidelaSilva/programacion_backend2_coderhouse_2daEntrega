@@ -1,4 +1,3 @@
-import { body } from "express-validator"
 import UserService from "../services/usersService.js"
 
 
@@ -17,8 +16,8 @@ class UserController {
             //OUT
             return res.status(201).send({status: 'success', message: 'Usuario Creado exitosamente', data: user})
         } catch (error){
-            console.log(error);
-            return res.status(500).json({ message: 'Error al crear usuario' });
+            console.log(error)
+            return res.status(500).json({ message: 'Error al crear usuario' })
         }
     }
 
@@ -30,7 +29,8 @@ class UserController {
             //OUT
             return res.status(200).send({status: 'success', message: 'Usuarios Encontrados exitosamente', data: users})
         } catch (error){
-            return res.status(500).json({ message: 'Error al devolver usuarios' });
+            console.log(error)
+            return res.status(400).json({ message: 'Error al devolver usuarios' })
         }
     }
 
@@ -45,7 +45,8 @@ class UserController {
                 return res.status(404).send({message: `Usuario id ${uid} no encontrado`})
             }
         } catch (error) {
-            console.log(error);
+            console.log(error)
+            return res.status(400).json({ message: 'Error al devolver usuario' })
         }
     }
 
@@ -61,9 +62,11 @@ class UserController {
                 return res.status(404).send({message: `Usuario id ${uid} no encontrado`})
             }
         } catch (error) {
-            console.log(error);
+            console.log(error)
+            return res.status(400).json({ message: 'Error al actualizar usuarios' })
         }
     }
+
 
     putUserEmail = async (req, res) => {
         try{
@@ -75,7 +78,8 @@ class UserController {
                 return res.status(404).send({message: `Usuario id no encontrado`})
             }
         } catch (error) {
-            console.log(error);
+            console.log(error)
+            return res.status(400).json({ message: 'Error al actualizar usuarios' })
         }
     }
     
@@ -91,14 +95,12 @@ class UserController {
                 return res.status(404).send({message: `Usuario id ${uid} no encontrado`})
             }
         } catch (error) {
-            console.log(error);
+            console.log(error)
+            return res.status(400).json({ message: 'Error al eliminar usuarios' })
         }
     }
 
-
-
 }
-
 
 
 

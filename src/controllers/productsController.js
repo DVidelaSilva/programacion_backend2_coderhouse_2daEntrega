@@ -1,4 +1,4 @@
-import ProductService from "../services/productsService.js";
+import ProductService from "../services/productsService.js"
 
 
 class ProductController {
@@ -16,8 +16,8 @@ class ProductController {
             //OUT
             return res.status(201).send({status: 'success', message: 'Producto Creado exitosamente', data: product})
         } catch (error){
-            console.log(error);
-            return res.status(500).json({ message: 'Error al crear producto' });
+            console.log(error)
+            return res.status(500).json({ message: 'Error al crear producto' })
         }
     }
 
@@ -29,7 +29,7 @@ class ProductController {
             //OUT
             return res.status(200).send({status: 'success', message: 'Productos Encontrados exitosamente', data: products})
         } catch (error){
-            return res.status(500).json({ message: 'Error al devolver productos' });
+            return res.status(500).json({ message: 'Error al devolver productos' })
         }
     }
 
@@ -44,7 +44,7 @@ class ProductController {
                 return res.status(404).send({message: `Producto id ${pid} no encontrado`})
             }
         } catch (error) {
-            console.log(error);
+            console.log(error)
         }
     }
 
@@ -60,7 +60,8 @@ class ProductController {
                 return res.status(404).send({message: `Producto id ${pid} no encontrado`})
             }
         } catch (error) {
-            console.log(error);
+            console.log(error)
+            return res.status(400).json({ message: 'Error al actualizar productos' })
         }
     }
 
@@ -75,7 +76,8 @@ class ProductController {
                 return res.status(404).send({message: `Usuario id ${pid} no encontrado`})
             }
         } catch (error) {
-            console.log(error);
+            console.log(error)
+            return res.status(400).json({ message: 'Error al eliminar productos' })
         }
     }
 
@@ -85,6 +87,8 @@ class ProductController {
 
 
 }
+
+
 
 
 

@@ -11,11 +11,11 @@ class UserRepository {
     createUserInDB = async (data) => {
         try {
             // IN
-            const user = await this.userDao.create(data);
+            const user = await this.userDao.create(data)
             //OUT
             return new UserDto(user)
         } catch (error){
-            console.log(error);
+            console.log(error)
         }
     }
 
@@ -27,7 +27,7 @@ class UserRepository {
             //OUT
             return users.map((user) => new UserDto(user))
         } catch (error) {
-            console.log(error);
+            console.log(error)
         }
     }
 
@@ -43,6 +43,7 @@ class UserRepository {
         }
     } 
     
+
     findUserByEmailInDB = async (email) => {
         try {
             //IN
@@ -57,6 +58,7 @@ class UserRepository {
         }
     } 
 
+
     updateUserByIdInDB = async (uid, data) => {
         try{
             //IN
@@ -64,19 +66,19 @@ class UserRepository {
             //OUT
             return new UserDto(updateUser)
         } catch (error) {
-            console.log(error);
+            console.log(error)
         }
     }
+
 
     updateUserByEmailInDB = async (email, newRole) => {
         try{
             //IN
             const updateUser = await this.userDao.updateRole(email, newRole)
             //OUT
-
             return updateUser
         } catch (error) {
-            console.log(error);
+            console.log(error)
         }
     }
 
@@ -88,14 +90,12 @@ class UserRepository {
             //OUT
             return new UserDto(deleteUser)
         } catch (error) {
-            console.log(error);
+            console.log(error)
         }
     }
 
-
-
-
 }
+
 
 
 export default UserRepository

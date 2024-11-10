@@ -1,38 +1,37 @@
 
 function registerUser(firstName, lastName, email, age, password, role) {
 
-  if (!firstName || !lastName || !email || !password || !role) {
-    Swal.fire({
-      title: 'Error',
-      text: 'Por favor, complete todos los campos requeridos.',
-      icon: 'error',
-      confirmButtonText: 'OK'
-    });
-    return;
-  }
+    if (!firstName || !lastName || !email || !password || !role) {
+      Swal.fire({
+        title: 'Error',
+        text: 'Por favor, complete todos los campos requeridos.',
+        icon: 'error',
+        confirmButtonText: 'OK'
+      })
+      return
+    }
 
-  // Validación de la edad (si se proporciona, debe ser un número)
-  if (age && isNaN(age)) {
-    Swal.fire({
-      title: 'Error',
-      text: 'La edad debe ser un número.',
-      icon: 'error',
-      confirmButtonText: 'OK'
-    });
-    return;
-  }
+    if (age && isNaN(age)) {
+      Swal.fire({
+        title: 'Error',
+        text: 'La edad debe ser un número.',
+        icon: 'error',
+        confirmButtonText: 'OK'
+      })
+      return
+    }
 
-    // Validación del rol
-    const validRoles = ['admin', 'user-premium', 'user'];
+    const validRoles = ['admin', 'user-premium', 'user']
     if (!validRoles.includes(role)) {
       Swal.fire({
         title: 'Error',
         text: 'El rol debe ser uno de los siguientes: admin, user-premium, user.',
         icon: 'error',
         confirmButtonText: 'OK'
-      });
-      return;
+      })
+      return
     }
+
   // Datos a enviar
   const userData = {
     first_name: firstName,
@@ -40,11 +39,11 @@ function registerUser(firstName, lastName, email, age, password, role) {
     email: email,
     password: password,
     role: role
-  };
+  }
 
   // Valida la edad opcional
   if (age) {
-    userData.age = age;
+    userData.age = age
   }
 
   // Fetch
@@ -71,30 +70,28 @@ function registerUser(firstName, lastName, email, age, password, role) {
         document.getElementById('age').value = '';
         document.getElementById('password').value = '';
         document.getElementById('role').value = '';
-      });
+      })
     } else {
       Swal.fire({
         title: 'Error',
         text: 'Error al registrar el usuario: ' + data.message,
         icon: 'error',
         confirmButtonText: 'OK'
-      });
+      })
     }
   })
   .catch(error => {
-    console.error('Error:', error);
+    console.error('Error:', error)
     Swal.fire({
       title: 'Error',
       text: 'Ocurrió un error al intentar registrar el usuario.',
       icon: 'error',
       confirmButtonText: 'OK'
-    });
-  });
+    })
+  })
 }
   
 
-
-// envío del formulario
 document.getElementById('register-form').addEventListener('submit', function(event) {
   event.preventDefault()
 
@@ -105,15 +102,10 @@ document.getElementById('register-form').addEventListener('submit', function(eve
   const password = document.getElementById('password').value
   const role = document.getElementById('role').value
 
-  registerUser(firstName, lastName, email, age, password, role);
-});
+  registerUser(firstName, lastName, email, age, password, role)
+})
 
 document.getElementById('btn-back').addEventListener('click', function() {
-  window.history.back();  // Esto llevará al usuario a la página anterior en el historial.
-});
+  window.history.back()
+})
 
-// // botón "Home"
-// document.getElementById('btn-home').addEventListener('click', function(event) {
-//   event.preventDefault(); 
-//   window.location.href = 'http://localhost:8080';
-// });

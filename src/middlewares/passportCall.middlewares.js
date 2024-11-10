@@ -1,4 +1,4 @@
-import passport  from "passport";
+import passport  from "passport"
 
 
 const passportCall = (strategy) => {
