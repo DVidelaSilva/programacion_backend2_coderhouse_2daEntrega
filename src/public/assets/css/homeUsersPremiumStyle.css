@@ -280,15 +280,16 @@ h2 {
 }
 
 .box {
+    /* Esta regla debe aplicar a todos los productos */
+    display: block;  /* O puedes usar display: grid si estás usando CSS Grid */
     border-top: 5px solid #eace1a;
     padding: 20px;
     border-radius: 15px;
     box-shadow: 0 5px rgba(0,0,0,0.2);
     background-color: #F6FAFB;
-    display: none;
 }
 
-.box:nth-child(1),
+/* .box:nth-child(1),
 .box:nth-child(2),
 .box:nth-child(3),
 .box:nth-child(4),
@@ -297,7 +298,7 @@ h2 {
 .box:nth-child(7),
 .box:nth-child(8) {
     display: inline-block;
-}
+} */
 
 .box img {
     height: 200px;

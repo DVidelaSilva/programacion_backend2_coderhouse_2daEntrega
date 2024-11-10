@@ -18,15 +18,15 @@ class TicketService {
             const logoPath = path.resolve('src/public/assets/images/logo.png')
 
             let result = await this.transport.sendMail({
-                from: `DAVS TEST <${envConfig.gmail_user}>`,
+                from: `Horror Book Store <${envConfig.gmail_user}>`,
                 to: `<${purchaser}>`,
-                subject: 'Correo de Prueba',
+                subject: 'Comprobante de Compra',
                 html: `
                     <div>
-                        <h1>Comprobante de Compra</h1>
+                        <h1>Comprobante de Compra Exitosa</h1>
                         <h3>Sr: ${purchaser}</h3>
-                        <h3>Con Fecha: ${created_at}</h3>
-                        <h3>Con Monto: ${amount}</h3>
+                        <h3>Fecha: ${created_at}</h3>
+                        <h3>Monto: ${amount}</h3>
                     </div>
                 `,
                 attachments:[{
